@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tango Argentin à Paris. Leah et Jean-Philippe</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel='stylesheet prefetch' href='./css/bulma.min.css'>
+    <link rel="stylesheet" href="css/style.css">
+    <script defer src="./js/jquery.min.js"></script>
+    <script defer src="./js/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
+    <script defer src="./js/index.js"></script>
+
+    <style>
+       /* Set the size of the div element that contains the map */
+      #map {
+        height: 400px;  /* The height is 400 pixels */
+        width: 100%;  /* The width is the width of the web page */
+       }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar" role="navigation" aria-label="dropdown navigation">
+
+      <div class="navbar-brand">
+        <a class="navbar-item" href="https://bulma.io">
+          <h1>TANGO ARGENTIN à Paris <br> <span>Leah et Jean-Philippe</span></h1>
+        </a>
+        <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+
+      <div class="navbar-menu tango-menu" id="navMenu">
+        <div class="navbar-end">
+          <a class="navbar-item " href="http://google.fr">
+            Le Tango
+          </a>
+          <a class="navbar-item " href="http://google.fr">
+            Professeurs
+          </a>
+          <a class="navbar-item " href="http://google.fr">
+            Cours
+          </a>
+          <a class="navbar-item " href="http://google.fr">
+            Nos references
+          </a>
+          <a class="navbar-item " href="http://google.fr">
+            Archives
+          </a>
+          <a class="navbar-item " href="http://google.fr">
+            Pratica Victor
+          </a>
+          <a class="navbar-item " href="http://google.fr">
+            Contact
+          </a>
+          <a class="navbar-item " href="http://google.fr">
+            Photos
+          </a>
+          <a class="navbar-item " href="http://google.fr">
+            Stage
+          </a>
+      </div>
+    </div>
+    </nav>
+
+    <section class="header-image"
+     style="background-image: url('./assets/DSC_4565.jpg');">
+      <!-- <img src="./assets/DSC_4498.jpg"  alt=“Tango argentin. Paris” title=“Tango argentin. Paris”> -->
+      <h1 class="title">
+        
+      </h1>
+
+      <div class="info-wrapper">
+        <h3>STAGE du DIMANCHE 27 NOVEMBRE</h3>
+        <p>Atelier tango de 15h à 17h: <br>
+        LA SPIRALE 2ème partie.</p>
+        <p>Atelier milonga de 17h à 19h: <br>
+        Les spécificités de la milonga.</p>
+
+        <a class="button">
+          En savoir plus
+        </a>
+      </div>
+      
+    </section>
+
+    <section class="page-cards page-cards-images columns">
+      <a href="/" class="column is-3-desktop is-4-tablet is-12-mobile">
+        <div style="background-image: url('./assets/tango-argentin-7.jpg');">
+          <p>Le plaisir de bouger dans la musique, le jeu, le partage d’émotions</p>
+        </div>
+        <h4>LE <br>TANGO ARGENTIN</h4>
+      </a>
+       <a href="/" class="column is-3-desktop is-4-tablet is-12-mobile">
+        <div style="background-image: url('./assets/DSC_3123.jpg');">
+          <p>Chaque moment de danse nous apporte quelque chose de nouveau. </p>
+        </div>
+        <h4>Cours</h4>
+      </a>
+       <a href="/" class="column is-3-desktop is-4-tablet is-12-mobile">
+        <div style="background-image: url('./assets/DSC_4650.jpg');">
+          <p>Leah & Jean-Philippe</p>
+        </div>
+        <h4>PROFESSEURS</h4>
+      </a>
+    </section>
+
+    <section class="section">
+      <div class="container">
+         <div id="map"></div>
+          <script>
+          // Initialize and add the map
+          function initMap() {
+            // The location of Uluru
+            var tango = {lat: 48.8469907, lng: 2.3535833};
+            // The map, centered at Uluru
+            var map = new google.maps.Map(
+                document.getElementById('map'), {zoom: 10, center: tango});
+            // The marker, positioned at Uluru
+            var marker = new google.maps.Marker({position: tango, map: map});
+          }
+          </script>
+          <!--Load the API from the specified URL
+          * The async attribute allows the browser to render the page while the API loads
+          * The key parameter will contain your own API key (which is not needed for this tutorial)
+          * The callback parameter executes the initMap() function
+          -->
+          <script async defer
+          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBUiM0RAGi35lLgQzNFFph1rjlBMnIqYhw&callback=initMap">
+          </script>
+        
+
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="columns">
+          <div class="column is-12 is-12-tablet is-12-mobile footer-brand">
+            <h4 class="bd-footer-title">
+              <a href="/">TANGO ARGENTIN à Paris <br> <span>Leah et Jean-Philippe</span></a>
+            </h4>
+          </div>
+        </div>
+
+        <div class="bd-footer-links">
+          <div class="columns">
+
+            <div class="column is-3 is-3-tablet is-5-mobile">
+
+              <p class="bd-footer-link-title">
+                <a href="">Professeurs</a>
+              </p>
+
+                <p class="bd-footer-link">
+                  <a href="/">
+                    Biographie
+                  </a>
+                </p>
+              
+                <p class="bd-footer-link">
+                  <a href="/">
+                    Notre pédagogie
+                  </a>
+                </p>
+              
+                <p class="bd-footer-link">
+                  <a href="/">
+                    Livre d'or
+                  </a>
+                </p>
+            
+            </div>
+
+            <div class="column is-3 is-3-tablet is-5-mobile">
+              <p class="bd-footer-link-title">
+                <a href="">Cours</a>
+              </p>
+              <p class="bd-footer-link">
+                <a href="">
+                  Cours
+                </a>
+              </p>
+              <p class="bd-footer-link">
+                <a href="">
+                  Horaires/Tarifs
+                </a>
+              </p>
+              <p class="bd-footer-link">
+                <a href="">
+                  Débutants
+                </a>
+              </p>
+            </div>
+
+            <div class="column is-3 is-3-tablet is-5-mobile">
+              <p class="bd-footer-link">
+                <a href="">
+                  Le Tango
+                </a>
+              </p>
+              <p class="bd-footer-link">
+                <a href="">
+                  Nos références
+                </a>
+              </p>
+              <p class="bd-footer-link">
+                <a href="">
+                  Archives ???
+                </a>
+              </p>
+              <p class="bd-footer-link">
+                <a href="">
+                  Pratica Victor ?
+                </a>
+              </p>
+            </div>
+
+            <div class="column is-3 is-3-tablet is-5-mobile">
+              <p class="bd-footer-link">
+                <a href="">
+                  Contact
+                </a>
+              </p>
+              <p class="bd-footer-link">
+                <a href="">
+                  Photos
+                </a>
+              </p>
+              <p class="bd-footer-link">
+                <a href="">
+                  Stage ?
+                </a>
+              </p>
+              <p class="bd-footer-link">
+                <a href="https://www.facebook.com/groups/487246421379169/" target="_blank">
+                  Facebook <i class="fab fa-facebook"></i>
+                </a>
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
