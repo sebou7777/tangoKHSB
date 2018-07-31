@@ -1,0 +1,424 @@
+#toTop {
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    cursor:pointer;
+    width:50px;
+    height:50px;
+    background-color:#FF590D;
+    text-indent:-9999px;
+    display:none;
+    -webkit-border-radius:5px;
+    -moz-border-radius:5px;
+    border-radius:5px;
+    z-index: 1000;
+}
+#toTop span {
+    position:absolute;
+    top:50%;
+    left:50%;
+    margin-left:-8px;
+    margin-top:-12px;
+    height:0;
+    width:0;
+    border:8px solid transparent;
+    border-bottom-color:#ffffff
+}
+#toTop:hover {
+    background-color:#c42a1a;
+    opacity:1;
+    filter:"alpha(opacity=100)";
+    -ms-filter:"alpha(opacity=100)";
+}
+#sticky-box-1 {
+    display:none;
+}
+.open-more {
+    overflow: hidden;
+    margin-bottom: 15px;
+    position:relative;
+}
+.open-more .action {
+    width: 100%;
+    height: 150px;
+    position: absolute;
+    display: none;
+    bottom: 0;
+    left: 0;
+    -webkit-box-shadow: inset 0px -50px 50px 0px rgba(255,255,255,1);
+    -moz-box-shadow: inset 0px -50px 50px 0px rgba(255,255,255,1);
+    box-shadow: inset 0px -50px 50px 0px rgba(255,255,255,1);
+}
+.open-more a.button {
+    bottom: 14px;
+    left: 50%;
+    position:absolute;
+    transform: translateX(-50%);
+    margin-bottom: 15px;
+}
+.open-more a.button.less {
+    display: none;
+}
+.open-more a.button:hover {
+    text-decoration: none;
+    background-color: #FF590D;
+}
+#gmap-home {
+    height: 25rem;
+}
+#gmap-contact {
+    height: 100%;
+}
+#gmap-stage {
+    height: 100%;
+}
+
+.header-image h1.title {
+    z-index: 29;
+    width: 40%;
+    margin: auto;
+    text-transform: uppercase;
+    color: #FF590D;
+    text-align: center;
+}
+
+h1.title {
+    font-size: 3rem;
+}
+
+section.page-cards.page-cards-images a h4 {
+    transition: 0.3s;
+}
+section.page-cards.page-cards-images a:hover h4 {
+    background-color: #FF590D;
+    color:white;
+}
+
+.gm-style img {
+    max-height: inherit;
+}
+a.button.read-more {
+    float: right;
+    margin-top: 1.5rem;
+    height:1.25rem;
+}
+
+@media (min-width: 769px) {
+    section.header-image .info-wrapper {
+        width:20%;
+        left:5%;
+    }
+}
+@media (max-width: 768px) {
+    section.page-cards a {
+        padding:0.05rem;
+        min-height:40px;
+        height:2rem;
+    }
+    section.page-cards a div {
+        display:none;
+    }
+    section.page-cards.page-cards-images h4 {
+        height:40px;
+    }
+    .header-image h1.title {
+        width: 80%;
+    }
+
+    .footer .column {
+        display: inline-block;
+    }
+
+    section.header-image .info-wrapper p {
+        width:50%;
+        float:left;
+    }
+    section.header-image .info-wrapper p:last-of-type {
+        display:none;
+    }
+    section.header-image .info-wrapper a {
+        float:right;
+    }
+
+    #gmap-contact {
+        height: 15rem;
+    }
+
+    #gmap-stage {
+        height: 15rem;
+    }
+
+    #gmap-home {
+        height: 15rem;
+    }
+
+    .open-more .desktop-hidden {
+        display: block;
+    }
+
+    .open-more {
+        height: 250px;
+    }
+    .column.sidebar {
+        display:none;
+    }
+}
+
+
+
+
+.content table.horaires {
+    border:0;
+    margin:0;
+    padding:0;
+}
+.content table.horaires tr {
+    border:0;
+    margin:0;
+    padding:0;
+}
+.content table.horaires tr th {
+    border:0;
+    margin:1px;
+    text-align:center;
+    padding:0.5rem;
+    border: 2px solid white;
+    vertical-align:middle;
+    background-color:lightgrey;
+}
+.content table.horaires tr td {
+    border:0;
+    margin:1px;
+    text-align:center;
+    padding:0.5rem;
+    border: 2px solid white;
+    vertical-align:middle;
+}
+.content table.horaires tr td p {
+    border:0;
+    margin:0;
+}
+.content table.horaires tr td.debutants {
+    background-color:lightgreen;
+}
+.content table.horaires tr td.inter {
+    background-color:lightblue;
+}
+.content table.horaires tr td.inter1 {
+    background-color:lightsalmon;
+}
+.content table.horaires tr td.inter2 {
+    background-color:lightcoral;
+}
+.content table.horaires tr td.avances {
+    background-color:crimson;
+}
+
+
+/*
+.columns {
+    position:relative;
+}
+.bloc-haut-background {
+    position:absolute;
+    opacity:0.3;
+    width:100%;
+    height:100%;
+    top:0;
+    left:0;
+}
+.bloc-haut-background img {
+    width:100%;
+    height:100%;
+}
+.bloc-haut-content {
+    position:relative;
+    z-index:1000;
+}
+
+.bloc-haut:hover {
+    background-color: coral;
+    opacity:1;
+    -webkit-transition: background-color 400ms linear;
+    -ms-transition: background-color 400ms linear;
+    transition: background-color 400ms linear;
+}
+.border-center {
+    position:absolute;
+    margin-left:auto;
+    margin-right:auto;
+    left: 50%;
+    width:1px;
+    height:100%;
+    background-color:#dbdbdb;
+}
+.left-34 {
+    left: 75%;
+}
+.bloc-haut {
+    background-color:#ddd;
+    overflow: hidden;
+    position:relative;
+    -webkit-transition: background-color 400ms linear;
+    -ms-transition: background-color 400ms linear;
+    transition: background-color 400ms linear;
+}
+
+
+
+
+body .columns {
+    margin: 0;
+}
+body .column {
+    margin: 0rem;
+}
+
+#content {
+    margin-top: 12px;
+}
+
+.alignleft {
+    float: left;
+}
+#gmap-stage {
+    height: 100%;
+}
+
+
+.desktop-hidden {
+    display:none;
+}
+@media (max-width: 768px) {
+    #content .sidebar {
+        display:none;
+    }
+    .contact img {
+        margin-left: 1rem;
+        margin-right: 0rem;
+    }
+    #gmap-contact {
+        height: 20rem;
+    }
+    #gmap-stage {
+        height: 20rem;
+    }
+    .open-more .desktop-hidden {
+        display:block;
+    }
+    .open-more {
+        height: 250px;
+    }
+    .columns .column.is-3, .columns .column.is-one-quarter {
+        width:auto;
+    }
+    .columns .column.is-6, .column.is-half {
+        width:auto;
+    }
+    .columns .column.is-4, .column.is-one-third {
+        width:auto;
+    }
+    .columns .column.is-2 {
+        width:auto;
+    }
+    .content div.table .column {
+        text-align:center !important;
+    }
+    .content .column.border-right {
+        border-right: 0;
+    }
+}
+.sidebar .tosticky.is-sticky {
+    width:calc(25% - 1.5rem);
+}
+.next-stage {
+    position:absolute;
+    bottom:5px;
+}
+
+.content div.table:not(:last-child) {
+    margin-bottom:0;
+    border-bottom: 1px solid #dbdbdb;
+}
+.content div.table .column {
+    padding: 0.5rem 0.75rem;
+}
+
+.columns .column {
+    margin:0 0.75rem;
+}
+
+@media (min-width: 769px) {
+    .columns .column.is-6, .column.is-half, #content .column.is-half {
+        width: calc(50% - 1.5rem)
+    }
+
+    .columns .column.is-4, .column.is-one-third {
+        width: calc(33.33333% - 1.5rem)
+    }
+
+    .columns .column.is-3, .columns .column.is-one-quarter {
+        width: calc(25% - 1.5rem)
+    }
+    .columns .column.is-9, .columns .column.is-three-quarters {
+        width: calc(75% - 1.5rem)
+    }
+
+    .columns .column.is-2 {
+        width: calc(16.66666% - 1.5rem)
+    }
+    .content .column.border-right {
+        box-shadow: 1px 0 0 #dbdbdb;
+    }
+}
+
+
+
+.content table.horaires {
+    border:0;
+    margin:0;
+    padding:0;
+}
+.content table.horaires tr {
+    border:0;
+    margin:0;
+    padding:0;
+}
+.content table.horaires tr th {
+    border:0;
+    margin:1px;
+    text-align:center;
+    padding:0.5rem;
+    border: 2px solid white;
+    vertical-align:middle;
+    background-color:lightgrey;
+}
+.content table.horaires tr td {
+    border:0;
+    margin:1px;
+    text-align:center;
+    padding:0.5rem;
+    border: 2px solid white;
+    vertical-align:middle;
+}
+.content table.horaires tr td p {
+    border:0;
+    margin:0;
+}
+.content table.horaires tr td.debutants {
+    background-color:lightgreen;
+}
+.content table.horaires tr td.inter {
+    background-color:lightblue;
+}
+.content table.horaires tr td.inter1 {
+    background-color:lightsalmon;
+}
+.content table.horaires tr td.inter2 {
+    background-color:lightcoral;
+}
+.content table.horaires tr td.avances {
+    background-color:crimson;
+}
+
+*/

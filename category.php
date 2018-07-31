@@ -1,13 +1,19 @@
 <?php get_header(); ?>
-<section id="content" role="main">
-<header class="header">
-<h1 class="entry-title"><?php _e( 'Category Archives: ', 'blankslate' ); ?><?php single_cat_title(); ?></h1>
-<?php if ( '' != category_description() ) echo apply_filters( 'archive_meta', '<div class="archive-meta">' . category_description() . '</div>' ); ?>
-</header>
-<?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
-<?php get_template_part( 'entry' ); ?>
-<?php endwhile; endif; ?>
-<?php get_template_part( 'nav', 'below' ); ?>
+<section id="content" class="content container">
+    <div class="columns">
+        <div class="column is-9">
+            <?php query_posts('cat='.get_category(get_query_var('cat'))->cat_ID.'&showposts=100'); ?>
+            <div class="columns is-multiline">
+                <?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
+                    <div class="column is-half"><?php get_template_part( 'entry' ); ?></div>
+                <?php endwhile; endif; ?>
+            </div>
+        </div>
+        <div class="border-center left-34"></div>
+        <div class="column is-3 sidebar">
+            <?php get_sidebar(); ?>
+        </div>
+    </div>
 </section>
-<?php get_sidebar(); ?>
+
 <?php get_footer(); ?>
