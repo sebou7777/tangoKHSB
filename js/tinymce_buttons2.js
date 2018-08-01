@@ -15,7 +15,7 @@
                 alert( 'On insère le tableau SANS texte' );
                 return;
             }
-            return_text = '<div class="columns"><div class="column is-half"><p></p></div><div class="column is-half"><p></p></div></div>';
+            return_text = '<div class="columns 2-columns"><div class="column is-half"><p></p></div><div class="column is-half"><p></p></div></div>';
             editor.execCommand('mceReplaceContent', false, return_text);
             return;
         });

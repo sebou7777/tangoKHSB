@@ -103,6 +103,7 @@ if ( ! function_exists( 'mythemeslug_buttons' ) ) {
 
 if ( ! function_exists( 'mythemeslug_add_buttons' ) ) {
     function mythemeslug_add_buttons( $plugin_array ) {
+        $plugin_array['columns1'] = get_template_directory_uri().'/js/tinymce_buttons1.js';
         $plugin_array['columns2'] = get_template_directory_uri().'/js/tinymce_buttons2.js';
         $plugin_array['columns3'] = get_template_directory_uri().'/js/tinymce_buttons3.js';
         $plugin_array['rouge'] = get_template_directory_uri().'/js/tinymce_rouge.js';
@@ -112,6 +113,7 @@ if ( ! function_exists( 'mythemeslug_add_buttons' ) ) {
 
 if ( ! function_exists( 'mythemeslug_register_buttons' ) ) {
     function mythemeslug_register_buttons( $buttons ) {
+        array_push( $buttons, 'columns1' );
         array_push( $buttons, 'columns2' );
         array_push( $buttons, 'columns3' );
         array_push( $buttons, 'rouge' );
@@ -124,6 +126,7 @@ if ( ! function_exists( 'mythemeslug_register_buttons' ) ) {
         return $buttons;
     }
     function mythemeslug_register_buttons_2( $buttons ) {
+        array_push( $buttons, 'columns1' );
         array_push( $buttons, 'columns2' );
         array_push( $buttons, 'columns3' );
         $remove = array('strikethrough', 'bullist', 'numlist', 'blockquote', 'hr', 'spellchecker', 'wp_adv', 'wp_more');
@@ -527,7 +530,7 @@ function get_bloc_stage($id = null)
 //  Gestion du "lire plus" dans les listes d'articles
 /***********************************************************************/
 function wpdocs_excerpt_more( $more ) {
-    return sprintf( '... <a class="button read-more" href="%1$s">%2$s</a>', get_permalink( get_the_ID() ), 'Lire plus');
+    return sprintf( '... <a class="button read-more" href="%1$s">%2$s</a>', get_permalink( get_the_ID() ), 'En savoir plus');
 }
 add_filter( 'excerpt_more', 'wpdocs_excerpt_more' );
 
