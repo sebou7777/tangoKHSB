@@ -1,6 +1,6 @@
 
-<article id="post-<?php the_ID(); ?>" class="content">
-<header>
+<!--<article id="post---><?php //the_ID(); ?><!--" class="content">-->
+<!--<header>-->
     <?php if(is_singular()): ?>
 <!--        <span class="cat-links">--><?php //the_category( ', ' ) ?><!--</span>-->
 <!--        <h1 class="has-text-centered">--><?php //the_title(); ?><!--</h1>-->
@@ -9,6 +9,6 @@
     <?php endif; ?>
 
 <?php if ( !is_search() ) get_template_part( 'entry', 'meta' ); ?>
-</header>
+<!--</header>-->
 <?php get_template_part( 'entry', ( is_archive() || is_search() ? 'summary' : 'content' ) ); ?>
-</article>
+<!--</article>-->

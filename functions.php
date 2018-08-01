@@ -105,6 +105,7 @@ if ( ! function_exists( 'mythemeslug_add_buttons' ) ) {
     function mythemeslug_add_buttons( $plugin_array ) {
         $plugin_array['columns2'] = get_template_directory_uri().'/js/tinymce_buttons2.js';
         $plugin_array['columns3'] = get_template_directory_uri().'/js/tinymce_buttons3.js';
+        $plugin_array['rouge'] = get_template_directory_uri().'/js/tinymce_rouge.js';
         return $plugin_array;
     }
 }
@@ -113,6 +114,7 @@ if ( ! function_exists( 'mythemeslug_register_buttons' ) ) {
     function mythemeslug_register_buttons( $buttons ) {
         array_push( $buttons, 'columns2' );
         array_push( $buttons, 'columns3' );
+        array_push( $buttons, 'rouge' );
         $remove = array('strikethrough', 'bullist', 'numlist', 'blockquote', 'hr', 'spellchecker', 'wp_adv', 'wp_more');
         foreach ( $buttons as $key => $value ) {
             if (in_array($value, $remove))
@@ -322,7 +324,7 @@ function add_blocs_hauts()
     add_meta_box( 'bloc_haut_3', 'Bloc Haut 3', 'add_bloc_haut', 'page', 'normal', 'high', array('nb' => 3) );
     add_meta_box( 'bloc_haut_4', 'Bloc Haut 4', 'add_bloc_haut', 'page', 'normal', 'high', array('nb' => 4) );
     wp_enqueue_script( 'add-meta-box-blocs-hauts', get_bloginfo('template_url').'/js/scripts-admin.js', array( 'jquery','media-upload','thickbox' ) );
-    add_editor_style('/css/editor-style.css');
+    add_editor_style('css/editor-style.css');
 }
 function save_blocs_hauts( $post_id ) {
     if( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return;
@@ -354,9 +356,9 @@ function add_bloc_haut( $post, $metabox ) {
     ?>
     <p>
         <input type="text" name="bloc_haut_titre_<?php echo $nb ?>" id="bloc_haut_titre_<?php echo $nb ?>" placeholder="Titre du bloc" value="<?php echo $text; ?>" />
-        <input type="text" name="bloc_haut_position_<?php echo $nb ?>" id="bloc_haut_position_<?php echo $nb ?>" placeholder="Position du bloc" value="<?php echo $position; ?>" />
+        <input type="text" name="bloc_haut_position_<?php echo $nb ?>" id="bloc_haut_position_<?php echo $nb ?>" placeholder="Position du bloc" style="width:120px;" value="<?php echo $position; ?>" />
         <input type="text" name="bloc_haut_url_<?php echo $nb ?>" id="bloc_haut_url_<?php echo $nb ?>" placeholder="URL du bloc" value="<?php echo $url; ?>" />
-        <input type="checkbox" name="bloc_haut_ajax_<?php echo $nb ?>" id="bloc_haut_ajax_<?php echo $nb ?>" placeholder="Ajax" value="1" <?php echo (($ajax) ? 'checked="checked"' : ''); ?> />
+        <input type="checkbox" name="bloc_haut_ajax_<?php echo $nb ?>" id="bloc_haut_ajax_<?php echo $nb ?>" placeholder="Ajax" value="1" <?php echo (($ajax) ? 'checked="checked"' : ''); ?> /><br />
         <input id="bloc_haut_image_<?php echo $nb ?>" style="width: 450px;" type="text" name="bloc_haut_image_<?php echo $nb ?>" value="<?php echo esc_url( $image ); ?>" />
         <input id="bloc_haut_image_upload_<?php echo $nb ?>" data-input="bloc_haut_image_<?php echo $nb ?>" class="button-secondary bloc_haut_image_upload" type="button" value="Choisir image" />
     </p>
@@ -561,7 +563,7 @@ function next_stage() {
     return $infos;
 }
 
-function next_alerte() {
+function next_alerte($offset = 1) {
     $args = array(
         'post_type' => 'post',
 //        'numberposts' => 1, // we need only the latest post, so get that post only
@@ -571,21 +573,27 @@ function next_alerte() {
     );
 
     $posts = get_posts($args);
-    $infos = null;
+    $infos = array();
 
     if(count($posts)) {
         foreach($posts as $post) {
             $temp = get_bloc_stage($post->ID);
             $temp['post_title'] = $post->post_title;
+            $temp['post_url'] = get_the_permalink($post);
             if(strtotime($temp['date'].' '.str_replace('h', ':', $temp['endtime']).':00') < time()) {
                 break;
             }
-            if(!$infos) $infos = $temp;
-            if($infos && strtotime($temp['date'].' '.str_replace('h', ':', $temp['endtime']).':00') < strtotime($infos['date'].' '.str_replace('h', ':', $infos['endtime']).':00')) {
-                $infos = $temp;
-            }
+//            if(!count($infos)) $infos = array($temp);
+//            if($infos && strtotime($temp['date'].' '.str_replace('h', ':', $temp['endtime']).':00') < strtotime($infos['date'].' '.str_replace('h', ':', $infos['endtime']).':00')) {
+                $infos[] = $temp;
+//            }
         }
     }
+    usort($infos, function ($item1, $item2) {
+        if ($item1['date'] == $item2['date']) return 0;
+        return $item1['date'] < $item2['date'] ? -1 : 1;
+    });
+
     return $infos;
 }
 

@@ -45,6 +45,6 @@ function initialize(index, position) {
     new google.maps.Marker(marker);
 }
 
-var script = document.createElement('script');
-script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyClMBaqKEYIBPwZN2KipIRCIzNsTnl0pu0&callback=prepare';
-document.head.appendChild(script);
+// var script = document.createElement('script');
+// script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyClMBaqKEYIBPwZN2KipIRCIzNsTnl0pu0&callback=prepare';
+// document.head.appendChild(script);

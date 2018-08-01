@@ -1,29 +1,35 @@
 
 div.columns {
     width:100%;
-    outline:1px dashed grey;
+    outline:1px dashed darkred;
+    margin-bottom:10px;
 }
 div.column {
     width: 100%;
     display: inline-block;
     outline: 1px dashed grey;
     vertical-align: top;
+    margin:2px;
+    padding:2px;
 }
 div.column.is-half {
-    width: 50%;
+    width: calc(50% - 8px);
 }
 div.column.is-1 {
-    width: 8.33333%;
+    width: calc(8.33333% - 8px);
 }
 div.column.is-3 {
-    width: 25%;
+    width: calc(25% - 8px);
 }
 div.column.is-4 {
-    width: 33.33333%;
+    width: calc(33.33333% - 8px);
 }
 div.column.is-6 {
-    width: 50%;
+    width: calc(50% - 8px);
 }
 div.column.is-7 {
-    width: 58.33333%;
+    width: calc(58.33333% - 8px);
+}
+div.column.is-9 {
+    width: calc(75% - 8px);
 }

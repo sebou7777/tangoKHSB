@@ -13,7 +13,6 @@ jQuery(document).ready(function($) {
         if(jQuery('#sticky-box-1') && jQuery('#sticky-box-1').attr('id')) {
             offsetHeight += jQuery(this).find('h4').first().height();
             if(jQuery(window).width() <= 768) {
-                console.log(jQuery(this).siblings().length);
                 offsetHeight += jQuery(this).siblings().length * jQuery(this).height();
             }else {
 
@@ -22,7 +21,10 @@ jQuery(document).ready(function($) {
         } else {
             offsetHeight += jQuery(this).height();
         }
-        jQuery("html, body").animate( { scrollTop: jQuery('#post-'+jQuery(this).data('id')+' .content').offset().top-offsetHeight }, 1000);
+        if(jQuery('#post-'+jQuery(this).data('id')).length)
+            jQuery("html, body").animate( { scrollTop: jQuery('#post-'+jQuery(this).data('id')).offset().top-offsetHeight }, 1000);
+        if(jQuery(this).find('h4').length)
+            jQuery('.header-image h1').text(jQuery(this).find('h4').text());
         e.preventDefault();
         e.stopPropagation();
     });
@@ -31,7 +33,7 @@ jQuery(document).ready(function($) {
         jQuery.get(
             ajaxurl, {'action': 'get_content_of_specific_page', 'param': id},
             function(response){
-                jQuery('#post-'+id+' .content').html(response);
+                jQuery('#post-'+id).html(response);
                 // jQuery("html, body").animate( { scrollTop: jQuery('#post-'+jQuery('#article_is_default').val()+' .content').offset().top }, 1000);
             }
         );
@@ -113,4 +115,20 @@ jQuery(document).ready(function($) {
             jQuery("html, body").animate( { scrollTop: jQuery(this).parent().parent().offset().top-parseInt(jQuery('.tosticky').height())-parseInt(jQuery('.is-fixed-top').height()) }, 1000);
         }
     });
+
+    if(jQuery('#gmap-home').length) {
+        jQuery('#gmap-home').on('mouseenter', function() {
+            if(!jQuery('#gmap-home').data('isloaded')) {
+                jQuery('#gmap-home').data('isloaded', true);
+                var script = document.createElement('script');
+                script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyClMBaqKEYIBPwZN2KipIRCIzNsTnl0pu0&callback=prepare';
+                document.head.appendChild(script);
+            }
+        });
+    } else {
+        var script = document.createElement('script');
+        script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyClMBaqKEYIBPwZN2KipIRCIzNsTnl0pu0&callback=prepare';
+        document.head.appendChild(script);
+    }
+
 });

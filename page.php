@@ -25,49 +25,39 @@
             </div>
         </section>
     <?php endif; ?>
-    <section>
-
-    </section>
 <?php endif; ?>
-
-<section id="content" class="container">
-
-    <?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
-        <?php if(is_gallery()): ?>
-            <?php get_template_part( 'gallery' ); ?>
-        <?php elseif(is_contact()): ?>
-            <?php get_template_part( 'contact' ); ?>
-        <?php else: ?>
-        <article id="post-<?php the_id() ?>" <?php post_class(); ?>>
-            <section class="content">
-                <?php the_content(); ?>
-
-            </section>
-        </article>
-        <?php endif; ?>
-
-        <?php if(count($blocs) && is_blocs_hauts_ajax()): ?>
-            <?php foreach($blocs as $bloc): ?>
-                <?php if($bloc['ajax'] && $bloc['id'] != get_the_id()): ?>
-                    <article id="post-<?php echo $bloc['id'] ?>" <?php post_class(); ?>>
-                        <section class="content">
-                        </section>
-                    </article>
-                <?php endif; ?>
-            <?php endforeach; ?>
-        <?php endif; ?>
-    <?php endwhile; endif; ?>
-</section>
 
 <?php if(is_front_page()): ?>
     <section class="section">
         <div class="container">
-            <div id="gmap-home"></div>
+            <div id="gmap-home" data-isloaded style="background-position: center;background-image:url(http://s331430828.onlinehome.fr/wp-content/uploads/2018/07/screenshot-s331430828.onlinehome.fr-2018-07-31-17-_f29867809674abbd77d5e8a710beb4d3.png)"></div>
         </div>
     </section>
     <script>
         googleMapsAddresses.push({"address":"35 rue Jussieu 75005 Paris", "title":"Ecole Victor", "zoom":"15", "pin_url":"", 'container':'gmap-home'});
     </script>
 <?php endif; ?>
+
+<section id="content" class="container">
+<?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
+    <?php if(is_gallery()): ?>
+        <?php get_template_part( 'gallery' ); ?>
+    <?php elseif(is_contact()): ?>
+        <?php get_template_part( 'contact' ); ?>
+    <?php else: ?>
+        <div id="post-<?php the_id() ?>" class="wp-content content">
+            <?php the_content(); ?>
+        </div>
+    <?php endif; ?>
+
+    <?php if(count($blocs) && is_blocs_hauts_ajax()): ?>
+        <?php foreach($blocs as $bloc): ?>
+            <?php if($bloc['ajax'] && $bloc['id'] != get_the_id()): ?>
+                <div id="post-<?php echo $bloc['id'] ?>" class="wp-content content"></div>
+            <?php endif; ?>
+        <?php endforeach; ?>
+    <?php endif; ?>
+<?php endwhile; endif; ?>
+</section>
 
 <?php get_footer(); ?>

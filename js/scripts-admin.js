@@ -3,6 +3,9 @@ jQuery(document).ready(function($) {
     $(".hasdatepicker").each(function() {
         $(this).datepicker('setDate', $(this).val());
     });
+    $('head').append('<style>.mce-toolbar .mce-btn-group .mce-btn.mce-rouge { margin-top:6px; } .mce-btn.mce-rouge button { background-color:#FF590D;height:15px;width:16px; }</style>');
+
+    // document.write('<style>.mce-btn.mce-rouge button { color:#FF590D; }</style>');
 
     // on initialise une variable qui nous permettra de détecter le champ à remplir
     var formfield = null;

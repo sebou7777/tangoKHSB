@@ -51,6 +51,7 @@
     <section class="header-image" style="<?php if(!is_front_page()): ?>height:50vh;<?php endif; ?>background-image: url('<?php echo $image[0]; ?>');">
         <?php if(!is_front_page()): ?><h1 class="title"><?php echo tango_get_top_title() ?></h1><?php endif; ?>
 
+        <?php $alerte = next_alerte(); $nbAlert = 0; ?>
         <?php if($stage = next_stage()): ?>
             <div class="info-wrapper has-text-centered">
                 <h3>PROCHAIN STAGE</h3>
@@ -58,13 +59,22 @@
                 <p><?php echo nl2br($stage['description']) ?></p>
                 <a class="button" href="<?php echo $stage['post_url'] ?>">En savoir plus</a>
             </div>
+        <?php elseif(isset($alerte[$nbAlert])): ?>
+            <div class="info-wrapper has-text-centered">
+                <h3><?php echo apply_filters( 'the_title', $alerte[$nbAlert]['post_title']) ?></h3>
+                <p><?php echo $alerte[$nbAlert]['date_format'] ?><br/><?php echo $alerte[$nbAlert]['time_format'] ?></p>
+                <p><?php echo nl2br($alerte[$nbAlert]['description']) ?></p>
+                <a class="button" href="<?php echo $alerte[$nbAlert]['post_url'] ?>">En savoir plus</a>
+            </div>
+            <?php $nbAlert++ ?>
         <?php endif; ?>
 
-        <?php if($alerte = next_alerte()): ?>
+        <?php if(isset($alerte[$nbAlert])): ?>
             <div class="info-wrapper has-text-centered alerte">
-                <h3><?php echo apply_filters( 'the_title', $alerte['post_title']) ?></h3>
-                <p><?php echo $stage['date_format'] ?><br/><?php echo $alerte['time_format'] ?></p>
-                <p><?php echo nl2br($alerte['description']) ?></p>
+                <h3><?php echo apply_filters( 'the_title', $alerte[$nbAlert]['post_title']) ?></h3>
+                <p><?php echo $alerte[$nbAlert]['date_format'] ?><br/><?php echo $alerte[$nbAlert]['time_format'] ?></p>
+                <p><?php echo nl2br($alerte[$nbAlert]['description']) ?></p>
+                <a class="button" href="<?php echo $alerte[$nbAlert]['post_url'] ?>">En savoir plus</a>
             </div>
         <?php endif; ?>
     </section>

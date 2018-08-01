@@ -64,7 +64,7 @@
     background-color: #FF590D;
 }
 #gmap-home {
-    height: 25rem;
+    height: 15rem;
 }
 #gmap-contact {
     height: 100%;
@@ -103,6 +103,68 @@ a.button.read-more {
     height:1.25rem;
 }
 
+#post-62 p {
+    width:80%;
+    padding:5px;
+    border: 1px solid grey;
+    background-color:white;
+}
+
+#content .wp-content h4 {
+    color:#FF590D;
+    margin-bottom:0.5rem;
+}
+#content .wp-content h4 span {
+    color:black;
+    font-size:16px;
+    font-weight:normal;
+}
+
+img.alignleft {
+    float:left;
+    max-width:30%;
+    margin-right:1rem;
+}
+img.alignright {
+    float:right;
+    max-width:30%;
+    margin-left:1rem;
+}
+img.aligncenter {
+    display: block;
+    max-width:100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#post-62 p:nth-child(even) {
+    margin-left:0;
+}
+#post-62 p:nth-child(odd) {
+    margin-left:20%;
+}
+
+.wp-content .columns.table {
+    border: 1px solid #dbdbdb;
+    border-bottom:0;
+    border-right:0;
+}
+.wp-content .columns.table p {
+    margin:2px 0;
+}
+.wp-content .columns.table.last {
+    border: 1px solid #dbdbdb;
+    border-right:0;
+    margin-bottom:0.5rem;
+}
+.wp-content .columns.table .column {
+    border-right: 1px solid #dbdbdb;
+}
+
+/*.wp-content .columns.table .column:not(:last-child) {*/
+    /*border-right: 1px solid #dbdbdb;*/
+/*}*/
+
 @media (min-width: 769px) {
     section.header-image .info-wrapper {
         width:20%;
@@ -129,6 +191,10 @@ a.button.read-more {
         display: inline-block;
     }
 
+    section.header-image .info-wrapper {
+        width:80%;
+        left:10%;
+    }
     section.header-image .info-wrapper p {
         width:50%;
         float:left;
@@ -164,7 +230,15 @@ a.button.read-more {
     }
 }
 
-
+.content div.table {
+    margin:0;
+}
+/*.content div.table:not(:last-child) {*/
+    /*border-bottom: 1px solid #dbdbdb;*/
+/*}*/
+.content div.table .column {
+    padding: 0.5rem 0.75rem;
+}
 
 
 .content table.horaires {
@@ -199,19 +273,22 @@ a.button.read-more {
     margin:0;
 }
 .content table.horaires tr td.debutants {
-    background-color:lightgreen;
+    background-color:#ff9666;
 }
 .content table.horaires tr td.inter {
-    background-color:lightblue;
+    background-color:lightgrey;
 }
 .content table.horaires tr td.inter1 {
-    background-color:lightsalmon;
+    background-color:#ff7433;
 }
 .content table.horaires tr td.inter2 {
-    background-color:lightcoral;
+    background-color:#ff590d;
 }
 .content table.horaires tr td.avances {
-    background-color:crimson;
+    background-color:#e64900;
+}
+#content .content table.horaires tr td {
+    border-bottom-width:2px;
 }
 
 
