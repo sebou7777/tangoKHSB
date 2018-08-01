@@ -4,7 +4,7 @@
 <?php if(count($blocs)): ?>
     <section class="page-cards page-cards-images columns tosticky">
     <?php foreach($blocs as $bloc): ?>
-        <a href="/<?php echo $bloc['url'] ?>" data-id="<?php echo $bloc['id'] ?>" class="column is-3-desktop is-4-tablet is-12-mobile <?php echo ((isset($bloc['is_selected'])) ? 'is-active' : '') ?> <?php echo (($bloc['ajax']) ? 'ajax-call' : '') ?>">
+        <a href="/<?php echo $bloc['url'] ?>" data-id="<?php echo $bloc['id'] ?>" class="column card is-3-desktop is-4-tablet is-12-mobile <?php echo ((isset($bloc['is_selected'])) ? 'is-active' : '') ?> <?php echo (($bloc['ajax']) ? 'ajax-call' : '') ?>">
             <div <?php echo (($bloc['image']) ? 'style="background-image: url('.$bloc['image'].');"' : '') ?>>
                 <p><?php echo nl2br($bloc['texte']) ?></p>
             </div>
