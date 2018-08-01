@@ -8,7 +8,7 @@
 
 body {
     margin: 0;
-    background-color: #ecf0f1;
+    background-color: white;
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
 }
@@ -18,6 +18,54 @@ img {
     max-width: 100%;
     max-height: 100%;
 }
+
+h1{
+    margin: auto;
+    text-transform: uppercase;
+    color: #FF590D;
+    text-align: center;
+    font-size: 60px;
+    font-family: 'Oswald', sans-serif;
+}
+@media screen and (min-width: 767px) {
+    h1{
+        width: 60%;
+        font-size: 36px;
+    }
+}
+
+@media screen and (max-width: 1023px) {
+    h1{
+        width: 50%;
+        font-size: 40px;
+    }
+}
+
+h2{
+    margin: 10px auto;
+    text-transform: uppercase;
+    color: #FF590D;
+    text-align: center;
+    font-size: 40px;
+    font-family: 'Wire One', sans-serif;
+    border-bottom: 3px solid #707070;
+}
+@media screen and (min-width: 767px) {
+    h2{
+        width: 60%;
+        font-size: 36px;
+    }
+}
+
+@media screen and (max-width: 1023px) {
+    h2{
+        width: 50%;
+        font-size: 40px;
+    }
+
+    h3{
+        color: #707070;
+    }
 
 button,
 .button{
@@ -74,6 +122,13 @@ a:active{
     margin: 0px;
     color: #000;
     font-family: 'Oswald', sans-serif;
+    font-size: 26px;
+}
+
+@media screen and (min-width: 767px) {
+    .navbar-brand .title-brand {
+        font-size: 19px;
+    }
 }
 
 .navbar-brand .title-brand span {
@@ -90,7 +145,7 @@ a:active{
 .tango-menu .navbar-link:hover,
 .tango-menu a.navbar-item.is-active,
 .tango-menu a.navbar-item:hover{
-    background-color: none;
+    background-color: unset;
     border-bottom: 2px solid #FF7E2E;
     color: #000;
 }
@@ -218,15 +273,11 @@ a:active{
     position: absolute;
     bottom: 10%;
     left: 5%;
-    width: 20%;
-    /*height: 40%;*/
+    width: 40%;
+    height: 40%;
     background-color: rgba(0, 0, 0, 0.8);
     color: white;
     padding: 15px;
-}
-.header-image .info-wrapper.alerte{
-    left:auto;
-    right:5%;
 }
 .header-image .info-wrapper h3{
     font-family: 'Oswald', sans-serif;
@@ -234,9 +285,10 @@ a:active{
     font-size: 24px;
     margin-bottom: 15px;
 }
+
 .header-image .info-wrapper p{
     font-size: 14px;
-    /*width: 80%;*/
+    width: 80%;
     margin-bottom: 10px;
 }
 
@@ -262,21 +314,25 @@ a:active{
 /*PAGE CARDS WITH AND WITHOUT IMAGES FOR LINKS*/
 /******************************/
 
+.page-cards.is-sticky{
+    background-color: white;
+}
+
 .page-cards{
     margin: 20px 0;
     display: flex;
     justify-content: space-around;
 }
-.page-cards a{
+.page-cards .card{
     width: 25%;
     min-height: 150px;
     height: 200px;
     display: flex;
     flex-direction: column;
-    /*flex-grow:*/
     justify-content: flex-end;
 }
-.page-cards a>div{
+
+.page-cards .card>div{
     flex: 1;
     height: 100%;
     display: flex;
@@ -289,7 +345,7 @@ a:active{
     position: relative;
 }
 
-.page-cards a>div::after{
+.page-cards .card>div::after{
     content: '';
     width: 100%;
     height: 100%;
@@ -308,7 +364,7 @@ a:active{
     z-index: 5;
 }
 
-.page-cards a h4{
+.page-cards .card h4{
     text-align: center;
     text-transform: uppercase;
     background-color: transparent;
@@ -317,6 +373,16 @@ a:active{
     width: 100%;
     font-family: 'Oswald', sans-serif;
 }
+    .page-cards.is-sticky .card h4{
+        background-color: white;
+        border:1px solid rgba(255,89,13, 0.5);
+        color: #323642;
+    }
+    .page-cards .card.is-active h4,
+    .page-cards.page-cards-images a:hover h4 {
+        background-color: rgba(255,89,13, 0.8);
+        color: white;
+    }
 
 
 .page-cards.page-cards-images h4
@@ -346,9 +412,6 @@ a:active{
         flex-direction: column;
     }
 
-    .header-image .info-wrapper.alerte{
-        display: none;
-    }
 }
 
 
@@ -356,9 +419,9 @@ a:active{
 
   .page-cards a{
     width: 30%;
-  }
+  }*/
 
-}*/
+}
 
 
 /******************************/
