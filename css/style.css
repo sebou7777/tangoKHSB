@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700|Roboto:100,100i,400,400i,500,700,900i|Wire+One');
+@import url('https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700|Roboto:100,100i,400,400i,500,700,900i|Wire+One|Raleway:300,400,500,600,700,800');
 * {
     box-sizing: border-box;
 }
@@ -19,59 +19,87 @@ img {
     max-height: 100%;
 }
 
-h1{
+#content{
+    margin-top: 30px; 
+}
+
+.header-image h1{
     margin: auto;
     text-transform: uppercase;
     color: #FF590D;
     text-align: center;
     font-size: 60px;
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Raleway', sans-serif;
 }
-@media screen and (min-width: 767px) {
-    h1{
+@media screen and (max-width: 767px) {
+    .header-image h1{
         width: 60%;
         font-size: 36px;
     }
 }
 
 @media screen and (max-width: 1023px) {
-    h1{
+    .header-image h1{
         width: 50%;
         font-size: 40px;
     }
 }
 
+.content h2,
 h2{
     margin: 10px auto;
     text-transform: uppercase;
     color: #FF590D;
     text-align: center;
-    font-size: 40px;
-    font-family: 'Wire One', sans-serif;
-    border-bottom: 3px solid #707070;
+    padding: 0 5px;
+    font-size: 24px;
+    font-family: 'Raleway', sans-serif;
+    border-bottom: 2px solid #707070;
+    font-weight: 300;
 }
-@media screen and (min-width: 767px) {
+
+.content h2 a,
+h2 a{
+    color: #FF590D;
+}
+
+@media screen and (max-width: 767px) {
+    .content h2,
     h2{
         width: 60%;
-        font-size: 36px;
+        font-size: 22px;
     }
 }
 
 @media screen and (max-width: 1023px) {
+    .content h2,
     h2{
         width: 50%;
-        font-size: 40px;
+        font-size: 24px;
     }
+}
 
-    h3{
-        color: #707070;
-    }
+h3{
+    color: #707070;
+}
+
 
 button,
 .button{
     background-color: #FF590D;
     color: white;
     border: 0 none;
+}
+
+.button.light {
+    background-color: white;
+    color: #FF590D;
+    border: 1px solid #FF590D;
+}
+
+.read-more{
+    display: inline-flex;
+    color: #FF590D;
 }
 
 a:hover,
@@ -125,27 +153,28 @@ a:active{
     font-size: 26px;
 }
 
-@media screen and (min-width: 767px) {
+.navbar-brand .title-brand span {
+    color: #FF590D;
+}
+
+@media screen and (max-width: 767px) {
     .navbar-brand .title-brand {
         font-size: 19px;
     }
 }
 
-.navbar-brand .title-brand span {
-    color: #FF590D;
-}
-
 .navbar-item {
-    font-family: 'Wire One', sans-serif;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 300;
     color: #000;
-    text-decoration: none;
-    font-size: 28px;
+    text-decoration: unset;
+    font-size: 18px;
 }
 .tango-menu .navbar-link.is-active,
 .tango-menu .navbar-link:hover,
 .tango-menu a.navbar-item.is-active,
 .tango-menu a.navbar-item:hover{
-    background-color: unset;
+    background-color: none;
     border-bottom: 2px solid #FF7E2E;
     color: #000;
 }
@@ -273,11 +302,15 @@ a:active{
     position: absolute;
     bottom: 10%;
     left: 5%;
-    width: 40%;
-    height: 40%;
+    width: 20%;
+    /*height: 40%;*/
     background-color: rgba(0, 0, 0, 0.8);
     color: white;
     padding: 15px;
+}
+.header-image .info-wrapper.alerte{
+    left:auto;
+    right:5%;
 }
 .header-image .info-wrapper h3{
     font-family: 'Oswald', sans-serif;
@@ -285,10 +318,9 @@ a:active{
     font-size: 24px;
     margin-bottom: 15px;
 }
-
 .header-image .info-wrapper p{
     font-size: 14px;
-    width: 80%;
+    /*width: 80%;*/
     margin-bottom: 10px;
 }
 
@@ -323,16 +355,15 @@ a:active{
     display: flex;
     justify-content: space-around;
 }
-.page-cards .card{
-    width: 25%;
-    min-height: 150px;
-    height: 200px;
+.page-cards .one-card{
+/*    min-height: 150px;
+    height: 200px;*/
     display: flex;
     flex-direction: column;
+    /*flex-grow:*/
     justify-content: flex-end;
 }
-
-.page-cards .card>div{
+.page-cards .one-card>div{
     flex: 1;
     height: 100%;
     display: flex;
@@ -345,7 +376,7 @@ a:active{
     position: relative;
 }
 
-.page-cards .card>div::after{
+.page-cards .one-card>div::after{
     content: '';
     width: 100%;
     height: 100%;
@@ -364,7 +395,7 @@ a:active{
     z-index: 5;
 }
 
-.page-cards .card h4{
+.page-cards .one-card h4{
     text-align: center;
     text-transform: uppercase;
     background-color: transparent;
@@ -373,17 +404,20 @@ a:active{
     width: 100%;
     font-family: 'Oswald', sans-serif;
 }
-    .page-cards.is-sticky .card h4{
-        background-color: white;
-        border:1px solid rgba(255,89,13, 0.5);
-        color: #323642;
-    }
-    .page-cards .card.is-active h4,
-    .page-cards.page-cards-images a:hover h4 {
-        background-color: rgba(255,89,13, 0.8);
-        color: white;
-    }
 
+.page-cards.is-sticky .one-card>div{
+    display: none;
+}
+.page-cards.is-sticky .one-card h4{
+    background-color: white;
+    border:1px solid rgba(255,89,13, 0.5);
+    color: #323642;
+}
+.page-cards .one-card.is-active h4,
+.page-cards.page-cards-images a:hover h4 {
+    background-color: rgba(255,89,13, 0.8);
+    color: white;
+}
 
 .page-cards.page-cards-images h4
 {
@@ -403,8 +437,16 @@ a:active{
 
 @media (max-width: 768px) {
 
-    .page-cards a{
-        width: 100%;
+    section.page-cards .one-card {
+        padding:0.05rem;
+        min-height:40px;
+        height:2rem;
+    }
+    section.page-cards .one-card div {
+        display:none;
+    }
+    section.page-cards.page-cards-images h4 {
+        height:40px;
     }
 
     .page-cards {
@@ -412,6 +454,9 @@ a:active{
         flex-direction: column;
     }
 
+    .header-image .info-wrapper.alerte{
+        display: none;
+    }
 }
 
 
@@ -419,8 +464,12 @@ a:active{
 
   .page-cards a{
     width: 30%;
-  }*/
+  }
 
+}*/
+
+.entry-date{
+    color: #8C8B8F;
 }
 
 

@@ -97,11 +97,6 @@ section.page-cards.page-cards-images a:hover h4 {
 .gm-style img {
     max-height: inherit;
 }
-a.button.read-more {
-    float: right;
-    margin-top: 1.5rem;
-    height:1.25rem;
-}
 
 #post-62 p {
     width:80%;
@@ -172,17 +167,6 @@ img.aligncenter {
     }
 }
 @media (max-width: 768px) {
-    section.page-cards a {
-        padding:0.05rem;
-        min-height:40px;
-        height:2rem;
-    }
-    section.page-cards a div {
-        display:none;
-    }
-    section.page-cards.page-cards-images h4 {
-        height:40px;
-    }
     .header-image h1.title {
         width: 80%;
     }
