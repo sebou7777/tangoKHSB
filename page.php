@@ -7,7 +7,7 @@
     <?php foreach($blocs as $bloc): ?>
         <a href="/<?php echo $bloc['url'] ?>" data-id="<?php echo $bloc['id'] ?>" class="column one-card is-3-desktop is-4-tablet is-12-mobile <?php echo ((isset($bloc['is_selected'])) ? 'is-active is-the-page' : '') ?> <?php echo (($bloc['ajax']) ? 'ajax-call' : '') ?>">
             <?php if($bloc['image']): ?>
-            <div <?php echo (($bloc['image']) ? 'style="background-image: url('.$bloc['image'].');"' : '') ?>>
+            <div <?php echo (($bloc['image']) ? 'style="background-image: url('.$bloc['image'].');"' : '') ?> class="card-text">
                 <p><?php echo nl2br($bloc['texte']) ?></p>
             </div>
             <?php endif; ?>
@@ -31,7 +31,7 @@
 <?php endif; ?>
 
 <?php if(is_front_page()): ?>
-    <section class="section">
+    <section class="">
         <div class="container">
             <div id="gmap-home" data-isloaded style="background-position: center;background-image:url(http://s331430828.onlinehome.fr/wp-content/uploads/2018/07/screenshot-s331430828.onlinehome.fr-2018-07-31-17-_f29867809674abbd77d5e8a710beb4d3.png)"></div>
         </div>
@@ -41,7 +41,7 @@
     </script>
 <?php endif; ?>
 
-<section id="content" class="container">
+<section id="content" class="container <?php echo ((is_front_page()) ? 'is-home' : '') ?>">
 <?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
     <?php if(is_gallery()): ?>
         <?php get_template_part( 'gallery' ); ?>
@@ -49,7 +49,7 @@
         <?php get_template_part( 'contact' ); ?>
     <?php else: ?>
         <div id="post-<?php the_id() ?>" class="wp-content content">
-            <?php the_content(); ?>
+            <?php echo get_the_content() ?>
         </div>
     <?php endif; ?>
 
