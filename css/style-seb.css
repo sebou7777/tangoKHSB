@@ -85,6 +85,9 @@
 p {
     text-align:justify;
 }
+.has-text-centered p {
+    text-align:center;
+}
 
 h1.title {
     font-size: 3rem;
@@ -99,8 +102,11 @@ section.page-cards .one-card > div {
 #content {
     margin-bottom:30px;
 }
+#content .box {
+    padding:0;
+}
 
-.wp-content.content h3, .wp-content.content h4{
+.wp-content.content h3, .wp-content.content h4, #content.content h4{
     margin: 10px auto;
     text-transform: uppercase;
     color: #FF590D;
@@ -108,9 +114,13 @@ section.page-cards .one-card > div {
     padding: 0 5px;
     font-size: 24px;
     font-family: 'Raleway', sans-serif;
-    border-bottom: 2px solid #707070;
+    border-bottom: 1px solid #707070;
     font-weight: 300;
 }
+#content.content h4{
+    border-bottom: 1px solid #e2e2e2;
+}
+
 .wp-content.content h3{
     font-size: 18px;
     border-bottom: 1px solid #707070;
@@ -140,17 +150,50 @@ section.page-cards.page-cards-images a:hover h4 {
     max-height: inherit;
 }
 
+.box.open-more {
+    background-color: #f3f3f3;
+}
+
+#content.is-home .columns {
+    /*background-color: #f3f3f3;*/
+    border: 1px solid grey;
+    width:90%;
+    margin-bottom:2rem;
+}
+#content.is-home .columns .column {
+    padding:0;
+}
+#content.is-home .columns .column .button {
+    margin-bottom:10px;
+}
+#content.is-home .columns:nth-child(even) {
+     margin-left:0;
+}
+#content.is-home .columns:nth-child(even) {
+    margin-left:10%;
+}
+#content.is-home .columns .column h2 {
+    text-align:left;
+    margin: 10px;
+}
+#content.is-home .columns .column img.alignleft, #content.is-home .columns .column img.alignright {
+    max-width:15%;
+    min-height: 100%;
+}
+
 #post-62 p {
     width:80%;
     padding:5px;
     border: 1px solid grey;
     background-color:white;
+    margin-bottom:10px;
 }
 
-/*#content .wp-content h4 {*/
-    /*color:#FF590D;*/
-    /*margin-bottom:0.5rem;*/
-/*}*/
+#content.is-home .columns .column p {
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
 #content .wp-content h4 span {
     color:#4a4a4a;
     font-size:16px;
@@ -183,6 +226,14 @@ img.aligncenter {
     margin-left:20%;
 }
 
+#content.content ul.menu-list {
+    list-style:none;
+    margin-left:0;
+}
+#content.content ul.menu-list li a.is-active {
+    background-color: #FF590D;
+}
+
 .wp-content .columns.table {
     border: 1px solid #dbdbdb;
     border-bottom:0;
@@ -200,6 +251,43 @@ img.aligncenter {
     border-right: 1px solid #dbdbdb;
 }
 
+@media screen and (max-width: 1023px) {
+    #content.is-home .columns .column h2 {
+        width:95%;
+        margin-top:0;
+        font-size: 20px;
+        text-align:center;
+    }
+    #content .content h3 {
+        text-align:center;
+    }
+    #content .content h2, #content.content h2, .open-more .content h2, h2 {
+        width: 95%;
+    }
+    #content.is-home .columns {
+        margin: 10px auto;
+    }
+    #content .content p {
+        margin: 0 10px;
+    }
+    #content #post-62.content > p {
+        margin-bottom:10px;
+        width:95%;
+    }
+
+    #content.is-home .columns .column img.alignleft, #content.is-home .columns .column img.alignright {
+        width:30%;
+        max-width:30%;
+        display:none;
+    }
+    #content.is-home .columns:nth-child(even) {
+        margin-left:auto;
+    }
+    .content table.horaires tr td p {
+        text-align:center;
+    }
+
+}
 /*.wp-content .columns.table .column:not(:last-child) {*/
     /*border-right: 1px solid #dbdbdb;*/
 /*}*/
@@ -211,6 +299,12 @@ img.aligncenter {
     }
 }
 @media (max-width: 768px) {
+    .bd-footer-links .column.is-6-mobile {
+        width:calc(50% - 2px);
+    }
+    .bd-footer-title {
+        text-align:center;
+    }
     .header-image h1.title {
         width: 80%;
     }
@@ -280,6 +374,7 @@ img.aligncenter {
     padding:0;
 }
 .content table.horaires tr th {
+    width:33.33333%;
     border:0;
     margin:1px;
     text-align:center;
