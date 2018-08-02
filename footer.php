@@ -14,7 +14,7 @@
             <?php foreach(tango_menu_footer() as $item): ?>
                 <?php if(count($item->submenu)): ?>
                     <?php $i = 0; ?>
-                    <div class="column is-3 is-3-tablet is-5-mobile">
+                    <div class="column is-3 is-3-tablet is-6-mobile">
                         <p class="bd-footer-link-title">
                             <a href="<?php echo $item->url ?>"><?php echo $item->title ?></a>
                         </p>
@@ -25,7 +25,7 @@
                         <?php endforeach; ?>
                     </div>
                 <?php else: ?>
-                    <?php if(!($i % 4)): ?><div class="column is-3 is-3-tablet is-5-mobile"><?php endif; ?>
+                    <?php if(!($i % 4)): ?><div class="column is-3 is-3-tablet is-6-mobile"><?php endif; ?>
                     <p class="bd-footer-link">
                         <a href="<?php echo $item->url ?>"><?php echo $item->title ?></a>
                     </p>
