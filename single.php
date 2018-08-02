@@ -9,12 +9,12 @@
                 <?php list($prev, $next) = get_pagination(); ?>
                 <div class="level-left">
                     <?php if($prev): ?>
-                        <a href="<?php echo $prev->post_url ?>"><?php echo $prev->post_title ?></a>
+                        <a class="button" href="<?php echo $prev->post_url ?>"><?php echo $prev->post_title ?></a>
                     <?php endif; ?>
                 </div>
                 <div class="level-right">
                     <?php if($next): ?>
-                        <a href="<?php echo $next->post_url ?>"><?php echo $next->post_title ?></a>
+                        <a class="button" href="<?php echo $next->post_url ?>"><?php echo $next->post_title ?></a>
                     <?php endif; ?>
                 </div>
             </div>
