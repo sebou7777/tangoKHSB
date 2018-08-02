@@ -73,6 +73,14 @@ return $count;
 include_once(get_template_directory().'/includes/contact.php');
 
 
+if( !function_exists( 'te_css_replacetag' ) ) {
+    add_filter('autoptimize_filter_css_replacetag','te_css_replacetag',10,1);
+    function te_css_replacetag($replacetag) {
+        return array("</body>","before");
+    }
+}
+
+
 
 add_action( 'after_setup_theme', 'mythemeslug_theme_setup' );
 
@@ -113,6 +121,7 @@ if ( ! function_exists( 'mythemeslug_add_buttons' ) ) {
 
 if ( ! function_exists( 'mythemeslug_register_buttons' ) ) {
     function mythemeslug_register_buttons( $buttons ) {
+        array_push( $buttons, 'styleselect' );
         array_push( $buttons, 'columns1' );
         array_push( $buttons, 'columns2' );
         array_push( $buttons, 'columns3' );
@@ -140,6 +149,16 @@ if ( ! function_exists( 'mythemeslug_register_buttons' ) ) {
     function tiny_mce_remove_unused_formats($init) {
         // Add block format elements you want to show in dropdown
         $init['block_formats'] = 'Paragraphe=p;Entête 2=h2;Entête 3=h3;Entête 4=h4';
+        $style_formats = array(
+            // Each array child is a format with it's own settings
+            array(
+                'title' => 'Lien de type bouton',
+                'selector' => 'a',
+                'classes' => 'button'
+            )
+        );
+        // Insert the array, JSON ENCODED, into 'style_formats'
+        $init['style_formats'] = json_encode( $style_formats );
         return $init;
     }
 }
