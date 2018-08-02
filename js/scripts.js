@@ -11,18 +11,18 @@ jQuery(document).ready(function($) {
         jQuery(this).addClass('is-active');
         var offsetHeight = parseInt(jQuery('.is-fixed-top').height())+20;
         if(jQuery('#sticky-box-1') && jQuery('#sticky-box-1').attr('id')) {
-            offsetHeight += jQuery(this).find('h4').first().height();
+            offsetHeight += jQuery(this).height();
             if(jQuery(window).width() <= 768) {
                 offsetHeight += jQuery(this).siblings().length * jQuery(this).height();
-            }else {
-
             }
-
         } else {
             offsetHeight += jQuery(this).height();
         }
-        if(jQuery('#post-'+jQuery(this).data('id')).length)
-            jQuery("html, body").animate( { scrollTop: jQuery('#post-'+jQuery(this).data('id')).offset().top-offsetHeight }, 1000);
+        if(jQuery('#post-'+jQuery(this).data('id')).length) {
+            jQuery("body").addClass('scrolling');
+            jQuery("html, body").animate( { scrollTop: jQuery('#post-'+jQuery(this).data('id')).offset().top-offsetHeight }, 1000, function() { jQuery("body").removeClass('scrolling') });
+        }
+
         if(jQuery(this).find('h4').length)
             jQuery('.header-image h1').text(jQuery(this).find('h4').text());
         e.preventDefault();
@@ -34,9 +34,30 @@ jQuery(document).ready(function($) {
             ajaxurl, {'action': 'get_content_of_specific_page', 'param': id},
             function(response){
                 jQuery('#post-'+id).html(response);
-                // jQuery("html, body").animate( { scrollTop: jQuery('#post-'+jQuery('#article_is_default').val()+' .content').offset().top }, 1000);
             }
         );
+    });
+
+    jQuery(document).on("scroll", function() {
+        if(jQuery('.is-sticky').length && !jQuery('body').hasClass('scrolling')) {
+            var menu = jQuery('.is-sticky').first();
+            var menuTop = menu.offset().top + menu.height() + parseInt(menu.css('margin-bottom'));
+
+            jQuery(".is-sticky a").each(function() {
+                if(jQuery(this).hasClass('ajax-call')) {
+                    var item = jQuery('#post-'+jQuery(this).data("id"));
+                    if(!item.data('start')) {
+                        item.data('start', item.offset().top);
+                        item.data('end', item.offset().top + item.height());
+                    }
+                    if(menuTop >= item.data('start') && menuTop <= item.data('end') && !jQuery(this).hasClass('is-active')) {
+                        jQuery(".is-sticky a").removeClass('is-active');
+                        jQuery(this).addClass('is-active');
+                        history.pushState(null, null, jQuery(this).attr('href'));
+                    }
+                }
+            });
+        }
     });
 
     baguetteBox.run('.photos');

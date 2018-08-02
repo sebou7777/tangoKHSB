@@ -40,21 +40,23 @@
                     options.stickyMarginTop = $(options.stickyMarginTopSelector).height() - 0*parseInt($(this).css('margin-top')) + 0.75*parseInt($(this).find('a').first().css('padding-top'));
                     options.stickyActiveCSS.top = $(options.stickyMarginTopSelector).height() - parseInt($(this).css('margin-top')) + 0.75*parseInt($(this).find('a').first().css('padding-top'));
                 } else {
+                    var margin = parseInt($(this).css('margin-top')) + parseInt($(this).find('a').first().css('margin-top')) + parseInt($(this).css('margin-bottom'));
+                    var padding = 0;parseInt($(this).find('a').first().css('padding-top'));
+                    var diva = $(this).find('a div').first().height();
+
                     options.stickyMarginTop = $(options.stickyMarginTopSelector).height() - parseInt($(this).css('margin-top')) + 0.75*parseInt($(this).find('a').first().css('padding-top'));
-                    options.stickyActiveCSS.top = $(options.stickyMarginTopSelector).height() - 2*parseInt($(this).css('margin-top')) + 0.75*parseInt($(this).find('a').first().css('padding-top'));
+                    options.stickyActiveCSS.top = $(options.stickyMarginTopSelector).height() - margin -diva - padding;
                     options.stickyMarginTop -= $(this).find('a div').first().height()+1;
-                    options.stickyActiveCSS.top -= $(this).find('a div').first().height()+1;
                 }
             }
-            // options.stickyMarginTop=88;
-            // options.stickyActiveCSS.top = 68;
+
             // Pour dissocier les sélecteurs (si multiple instance)
             var el = $(this);
 
             // On encadre le bloc ciblé par une DIV nécessaire pour faire l'effet sticky
             el.wrap('<div class="'+options.stickyBlockClass+' '+options.stickyBlockClass+'-'+stickyCount+'"></div>');
-            // var newTempHeight = $('.'+options.stickyBlockClass+'-'+stickyCount).height() - parseInt($('.'+options.stickyBlockClass+'-'+stickyCount+' :first-child').css('margin-bottom'));
-            var newTempHeight = $('.'+options.stickyBlockClass+'-'+stickyCount).height() + parseInt($(this).css('margin-top')) + 12;
+            var delta = 10; // pour corriger les 30 de margin-top juste dessous partout
+            var newTempHeight = $('.'+options.stickyBlockClass+'-'+stickyCount).height() + parseInt($(this).first().css('margin-top')) - parseInt($(this).css('margin-bottom')) - delta;
             $('.'+options.stickyBlockClass+'-'+stickyCount).append('<div id="'+options.stickyBlockClass+'-'+stickyCount+'" style="height:'+newTempHeight+'px"></div>');
 
             // On prend les dimensions par défaut du bloc (hauteur dynamique)

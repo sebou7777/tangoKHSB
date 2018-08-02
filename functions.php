@@ -489,7 +489,7 @@ function add_champs_stage($post) {
 function get_is_stage($id = null)
 {
     foreach(get_the_category($id) as $categ) {
-        if(in_array($categ->category_nicename, array('stages', 'alerte'))) {
+        if(in_array($categ->category_nicename, array('stages', 'attention'))) {
             return true;
             break;
         }
@@ -530,7 +530,7 @@ function get_bloc_stage($id = null)
 //  Gestion du "lire plus" dans les listes d'articles
 /***********************************************************************/
 function wpdocs_excerpt_more( $more ) {
-    return sprintf( '... <a class="button read-more" href="%1$s">%2$s</a>', get_permalink( get_the_ID() ), 'En savoir plus');
+    return sprintf( '... <a class="read-more" href="%1$s">%2$s</a>', get_permalink( get_the_ID() ), 'En savoir plus');
 }
 add_filter( 'excerpt_more', 'wpdocs_excerpt_more' );
 

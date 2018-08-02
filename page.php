@@ -2,19 +2,22 @@
 
 <?php $blocs = get_blocs_hauts(); ?>
 <?php if(count($blocs)): ?>
+<!--    <section class="page-cards page-cards-images columns --><?php //echo ((is_blocs_hauts_ajax()) ? 'tosticky' : '') ?><!--">-->
     <section class="page-cards page-cards-images columns tosticky">
     <?php foreach($blocs as $bloc): ?>
-        <a href="/<?php echo $bloc['url'] ?>" data-id="<?php echo $bloc['id'] ?>" class="column one-card is-3-desktop is-4-tablet is-12-mobile <?php echo ((isset($bloc['is_selected'])) ? 'is-active' : '') ?> <?php echo (($bloc['ajax']) ? 'ajax-call' : '') ?>">
+        <a href="/<?php echo $bloc['url'] ?>" data-id="<?php echo $bloc['id'] ?>" class="column one-card is-3-desktop is-4-tablet is-12-mobile <?php echo ((isset($bloc['is_selected'])) ? 'is-active is-the-page' : '') ?> <?php echo (($bloc['ajax']) ? 'ajax-call' : '') ?>">
+            <?php if($bloc['image']): ?>
             <div <?php echo (($bloc['image']) ? 'style="background-image: url('.$bloc['image'].');"' : '') ?>>
                 <p><?php echo nl2br($bloc['texte']) ?></p>
             </div>
+            <?php endif; ?>
             <h4><?php echo $bloc['titre'] ?></h4>
         </a>
     <?php endforeach; ?>
     </section>
     <?php if(is_front_page()): ?>
         <?php $edito = last_edito(); ?>
-        <section class="box container open-more">
+        <section class="box container open-more" style="margin-top:30px;">
             <div class="content">
                 <h2 class="has-text-centered"><?php echo $edito->post_title ?></h2>
                 <?php echo apply_filters('the_content', $edito->post_content) ?>

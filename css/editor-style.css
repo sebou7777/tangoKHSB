@@ -33,3 +33,26 @@ div.column.is-7 {
 div.column.is-9 {
     width: calc(75% - 8px);
 }
+
+h2, h3, h4{
+    margin: 10px auto;
+    text-transform: uppercase;
+    color: #FF590D;
+    text-align: center;
+    padding: 0 5px;
+    font-size: 24px;
+    font-family: 'Raleway', sans-serif;
+    border-bottom: 2px solid #707070;
+    font-weight: 300;
+}
+h3{
+    font-size: 18px;
+    border-bottom: 1px solid #707070;
+    text-align:left;
+}
+h4{
+    font-size: 16px;
+    color: #4a4a4a;
+    border-bottom: 1px solid #707070;
+    text-align:left;
+}
