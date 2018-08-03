@@ -14,7 +14,7 @@
                 alert( 'On insère le tableau SANS texte' );
                 return;
             }
-            return_text = '<div class="columns 3-columns"><div class="column is-4"><p></p></div><div class="column is-4"><p></p></div><div class="column is-4"><p></p></div></div>';
+            return_text = '<div class="columns three-columns"><div class="column is-4"><p></p></div><div class="column is-4"><p></p></div><div class="column is-4"><p></p></div></div>';
             editor.execCommand('mceReplaceContent', false, return_text);
             return;
         });
