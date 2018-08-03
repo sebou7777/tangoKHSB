@@ -5,7 +5,7 @@
 <!--    <section class="page-cards page-cards-images columns --><?php //echo ((is_blocs_hauts_ajax()) ? 'tosticky' : '') ?><!--">-->
     <section class="page-cards page-cards-images columns tosticky">
     <?php foreach($blocs as $bloc): ?>
-        <a href="/<?php echo $bloc['url'] ?>" data-id="<?php echo $bloc['id'] ?>" class="column one-card is-3-desktop is-4-tablet is-12-mobile <?php echo ((isset($bloc['is_selected'])) ? 'is-active is-the-page' : '') ?> <?php echo (($bloc['ajax']) ? 'ajax-call' : '') ?>">
+        <a href="/<?php echo $bloc['url'] ?>" data-id="<?php echo $bloc['id'] ?>" class="column one-card is-3-desktop is-4-tablet is-12-mobile <?php echo ((isset($bloc['is_selected'])) ? 'is-active is-the-page' : '') ?> <?php echo (($bloc['ajax']) ? 'ajax-call' : '') ?>" title="<?php echo $bloc['titre'] ?>">
             <?php if($bloc['image']): ?>
             <div <?php echo (($bloc['image']) ? 'style="background-image: url('.$bloc['image'].');"' : '') ?> class="card-text">
                 <p><?php echo nl2br($bloc['texte']) ?></p>
@@ -23,8 +23,8 @@
                 <?php echo apply_filters('the_content', $edito->post_content) ?>
             </div>
             <div class="action desktop-hidden">
-                <a class="button more">ouvrir</a>
-                <a class="button less">fermer</a>
+                <a class="button more" title="Lire la suite">Lire la suite</a>
+                <a class="button less" title="Fermer">Fermer</a>
             </div>
         </section>
     <?php endif; ?>
