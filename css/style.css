@@ -262,9 +262,13 @@ a:active{
     background-color: #7E7E7E;
 }
 
+.footer .bd-footer-title a{
+    font-size: 26px;
+}
+
 .footer a{
-    font-size: 30px;
-    line-height: 40px;
+    font-size: 20px;
+    line-height: 32px;
     font-family: 'Wire One', sans-serif;
     color: white;
 }
@@ -281,8 +285,17 @@ a:active{
     border-bottom: 1px solid;
 }
 
+@media (max-width: 767px) {
+    .footer a{
+        font-size: 14px;
+        line-height: 22px;
+    }
+}
 
+
+/***********************************/
 /*HEADER IMAGE*/
+/***********************************/
 .header-image {
     position: relative;
     width: 100%;
@@ -322,6 +335,15 @@ a:active{
     font-size: 14px;
     /*width: 80%;*/
     margin-bottom: 10px;
+}
+
+@media screen and (min-width: 1088px){
+    .navbar,
+    .navbar-end,
+    .navbar-menu,
+    .navbar-start {
+        align-items: center;
+    }
 }
 
 @media (max-width: 1023px) {
