@@ -264,6 +264,16 @@ function rd_duplicate_post_as_draft(){
 }
 add_action( 'admin_action_rd_duplicate_post_as_draft', 'rd_duplicate_post_as_draft' );
 
+function override_mce_options($initArray) {
+    $opts = '*[*]';
+    $initArray['valid_elements'] = $opts;
+    $initArray['extended_valid_elements'] = $opts;
+    return $initArray;
+} add_filter('tiny_mce_before_init', 'override_mce_options');
+
+
+
+
 /*
  * Add the duplicate link to action list for post_row_actions
  */
@@ -283,7 +293,7 @@ add_filter( 'post_row_actions', 'rd_duplicate_post_link', 10, 2 );
 /***********************************************************************/
 function add_defer_attribute($tag, $handle) {
     // add script handles to the array below
-    $scripts_to_defer = array('script_theme', 'jquery-core', 'jquery-migrate', 'script_maps', 'validate', 'sticky');
+    $scripts_to_defer = array('script_theme', 'jquery-core', 'jquery-migrate', 'script_maps', 'validate', 'sticky', 'featherlight');
 
     foreach($scripts_to_defer as $defer_script) {
         if ($defer_script === $handle) {
@@ -339,6 +349,8 @@ function add_js_scripts() {
     wp_enqueue_style('bulma', get_template_directory_uri().'/css/bulma.min.css');
     wp_enqueue_style('normalize', get_template_directory_uri().'/css/normalize.css');
     wp_enqueue_style('font-awesome', get_template_directory_uri().'/css/font-awesome.min.css');
+    wp_enqueue_style('featherlight', get_template_directory_uri().'/css/featherlight.css');
+    wp_enqueue_script( 'featherlight', get_template_directory_uri().'/js/featherlight.js', array('jquery'), '1.0', true );
     wp_enqueue_script( 'script_theme', get_template_directory_uri().'/js/scripts.js', array('jquery'), '1.0', true );
     wp_enqueue_script( 'sticky', get_template_directory_uri().'/js/sticky.js', array('jquery'), '1.0', true );
     wp_enqueue_script( 'validate', get_template_directory_uri().'/js/jquery.validate.min.js', array('jquery'), '1.0', true);
