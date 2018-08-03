@@ -163,12 +163,16 @@ jQuery(document).ready(function($) {
     $('section.page-cards a div').on('mouseenter mouseleave', function(e) {
         $(this).parent().find('h4').trigger(e.type);
     })
-    jQuery('')
-
 
     var openMoreDefaultHeight;
+
+    jQuery('.open-more').each(function() {
+        jQuery(this).append('<div class="action desktop-hidden"><a class="button more" title="'+jQuery(this).data('open')+'">'+jQuery(this).data('open')+'</a><a class="button less" title="'+jQuery(this).data('close')+'">'+jQuery(this).data('close')+'</a></div>');
+    });
+
     jQuery('body').on('click', '.open-more a.button', function(){
         var s = jQuery(this).closest('.open-more');
+        console.log(s);
         if(!s.hasClass('opened')){
             openMoreDefaultHeight = parseInt(s.css('height'));
             var h = s.find('.content').height();
