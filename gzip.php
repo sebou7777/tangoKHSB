@@ -45,7 +45,7 @@ $buf=file_get_contents($file);
  ******************************************************************************/
 if (stripos($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip')=== false) {
     $len=strlen($buf);
-    header("Content-type: $header_contenttype; charset: UTF-8");
+    header("Content-type: $header_contenttype; charset= UTF-8");
     header('Content-Length: '.$len);
     header('Vary: Accept-Encoding');
     header('Expires: '.gmdate('D, d M Y H:i:s GMT', strtotime(" 1 month")));
@@ -85,7 +85,7 @@ if ($file_cachedt>$filedt) {
  * Envoyer la ressource compressé au navigateur
  ******************************************************************************/
 $len=strlen($gz);
-header("Content-type: $header_contenttype; charset: UTF-8");
+header("Content-type: $header_contenttype; charset= UTF-8");
 header('Content-Length: '.$len);
 header('Content-Encoding: gzip');
 header('Vary: Accept-Encoding');
