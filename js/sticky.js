@@ -1,13 +1,3 @@
-/*----------------------------------------------------------*/
-// Project name : jQuery StickyZone
-// Author: Mathieu Chartier
-// Author website: http://blog.internet-formation.fr
-// Project website : http://www.testeur.ml
-// Origin: France
-// Date: 03/20/2017
-// Version: 1.0
-// Note: it works perfectly with the last version of jQuery
-/*----------------------------------------------------------*/
 (function($){
     var stickyCount = 0; // Pour l'usage multiple du plugin
     $.fn.stickyZone = function(args) {
@@ -111,16 +101,6 @@
                             });
                         }
 
-                        /* $.each(options.stickyOthersOffsets, function(index,data) {
-                         if(options.stickyOthersOffsets[index].blockName != false) {
-                         $(options.stickyOthersOffsets[index].blockName).each(function(n, d) {
-                         var offsetMaths = Math.round(options.stickyOthersOffsets[index].blockOffset);
-                         $(d).css({
-                         'margin-top':offsetMaths
-                         });
-                         });
-                         }
-                         });*/
                     }
                     else // Si on est retourné au niveau le plus haut (donc plus de mode Sticky)
                     {
