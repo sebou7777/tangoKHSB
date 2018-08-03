@@ -78,7 +78,13 @@ section.header-image {
     min-height: 250px;
     max-height: 300px;
 }
-
+.written_date {
+    text-align:center;
+    color:lightgrey;
+}
+p.gm-style-pbt {
+    text-align:center;
+}
 .desaturate:before {
     content: '';
     position: absolute;
