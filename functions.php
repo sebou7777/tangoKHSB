@@ -294,8 +294,30 @@ function add_defer_attribute($tag, $handle) {
 }
 add_filter('script_loader_tag', 'add_defer_attribute', 100, 2);
 
+add_filter('style_loader_tag', 'tango_remove_type_attr', 10, 2);
+add_filter('script_loader_tag', 'tango_remove_type_attr', 10, 2);
 
-/***********************************************************************/
+function tango_remove_type_attr($tag, $handle) {
+    return preg_replace( "/type=['\"]text\/(javascript|css)['\"]/", '', $tag );
+}
+
+add_filter('autoptimize_html_after_minify', function($content) {
+    $site_url = get_home_url();
+    $content = str_replace("type='text/javascript'", ' ', $content);
+    $content = str_replace('type="text/javascript"', ' ', $content);
+
+    $content = str_replace("type='text/css'", ' ', $content);
+    $content = str_replace('type="text/css"', ' ', $content);
+
+    $content = str_replace($site_url . '/wp-includes/js', '/wp-includes/js', $content);
+    $content = str_replace($site_url . '/wp-content/cache/autoptimize', '/wp-content/cache/autoptimize', $content);
+    $content = str_replace($site_url . '/wp-content/themes/', '/wp-content/themes/', $content);
+    $content = str_replace($site_url . '/wp-content/uploads/', '/wp-content/uploads/', $content);
+    $content = str_replace($site_url . '/wp-content/plugins/', '/wp-content/plugins/', $content);
+    return $content;
+}, 10, 1);
+
+    /***********************************************************************/
 //  Gestion AJAX
 /***********************************************************************/
 add_action('wp_enqueue_scripts', 'add_js_scripts');
@@ -514,11 +536,6 @@ function get_is_stage($id = null)
         }
     }
     return false;
-}
-
-add_action('wp_enqueue_scripts', 'add_js_maps');
-function add_js_maps() {
-    wp_enqueue_script( 'script_maps', get_template_directory_uri().'/js/maps.js', array('jquery'), '1.0', true );
 }
 
 function get_bloc_stage($id = null)
@@ -750,12 +767,11 @@ function tango_get_top_image()
 {
     $post = get_post();
     if($test = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'full' )) {
-        $image = $test;
+        return array($test, true);
     } else {
         $image = wp_get_attachment_image_src( get_post_thumbnail_id(219), 'full' );
+        return array($image, false);
     }
-
-    return $image;
 }
 function tango_get_top_title()
 {
