@@ -20,7 +20,7 @@ img {
 }
 
 #content{
-    margin-top: 30px; 
+    margin-top: 30px;
 }
 
 .header-image h1{
@@ -494,6 +494,21 @@ a:active{
     color: #8C8B8F;
 }
 
+.level-left a{
+    color: #FF590D;
+    display: inline-flex;
+    flex-direction: row-reverse;
+}
+.level-right a{
+    color: #FF590D;
+    display: inline-flex;
+    flex-direction: row;
+}
+.level-left a .icon,
+.level-right a .icon,{
+    margin: 0px 7px;
+    color: #FF590D;
+}
 
 /******************************/
 @media only screen and (max-width: 767px) {
