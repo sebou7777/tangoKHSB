@@ -10,15 +10,12 @@
     </div>
 </section>
 <?php endif; ?>
-<div class="content has-text-centered">
-    <h1>Contacter-Nous</h1>
-</div>
-<div class="columns content contact">
-    <div class="column is-three-quarters has-text-centered"><i class="fas fa-phone"></i> 01 48 87 44 97 / <i class="fas fa-phone"></i> 06 12 06 87 51</div>
-    <div class="column is-one-quarter has-text-centered"><b>35 rue Jussieu 75005 Paris</b></div>
-</div>
+
 <div class="columns content contact">
     <div class="column is-three-quarters">
+        <div class="column">
+            <?php the_content() ?>
+        </div>
         <form method="post" action="" id="#contact">
             <div class="contact">
                 <div class="field is-horizontal">
@@ -75,7 +72,7 @@
 
                 <div class="field is-grouped is-grouped-centered">
                     <div class="control">
-                        <button class="button is-link" type="submit" name="submit">Envoyer</button>
+                        <button class="button" type="submit" name="submit">Envoyer</button>
                     </div>
                 </div>
             </div>
@@ -93,8 +90,3 @@
 
 
 
-<div class="columns content contact">
-    <div class="column is-three-quarters">
-        <?php the_content() ?>
-    </div>
-</div>
