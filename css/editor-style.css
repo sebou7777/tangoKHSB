@@ -56,6 +56,13 @@ h4{
     border-bottom: 1px solid #707070;
     text-align:left;
 }
+h4 span {
+    color:#4a4a4a;
+    font-size:16px;
+    text-transform: none;
+    font-family: 'Roboto', sans-serif;
+    font-weight:normal;
+}
 .button{
     background-color: #FF590D;
     color: white;
