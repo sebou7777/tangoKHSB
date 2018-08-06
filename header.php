@@ -6,6 +6,7 @@
     <?php wp_head(); ?>
     <link rel="stylesheet" type="text/css" href="<?php echo get_template_directory_uri().'/css/style.css'; ?>" />
     <script>var googleMapsAddresses = new Array();</script>
+    <script>var locationIQAddresses = new Array();</script>
 </head>
 <body>
     <a href="javascript:void(0);" id="toTop" title="Haut de page" style="display: none;">Top<span></span></a>
@@ -48,7 +49,7 @@
 
     <?php list($image, $hasSpecificImage) = tango_get_top_image(); ?>
     <?php if($image && count($image)): ?>
-    <section class="header-image desaturate <?php if(is_front_page()): ?>is-home<?php endif; ?> <?php if($hasSpecificImage): ?>has-specific-image<?php endif; ?>" style="background-image: url('<?php echo $image[0]; ?>');">
+    <section class="header-image desaturte <?php if(is_front_page()): ?>is-home<?php endif; ?> <?php if($hasSpecificImage): ?>has-specific-image<?php endif; ?>" style="background-image: url('<?php echo $image[0]; ?>');">
         <?php if(!is_front_page()): ?>
             <h1 class="title"><?php echo tango_get_top_title() ?></h1>
         <?php else: ?>
@@ -63,7 +64,9 @@
             <?php elseif(isset($alerte[$nbAlert])): ?>
                 <div class="info-wrapper has-text-centered">
                     <h3><?php echo apply_filters( 'the_title', $alerte[$nbAlert]['post_title']) ?></h3>
-                    <p><?php echo $alerte[$nbAlert]['date_format'] ?><br/><?php echo $alerte[$nbAlert]['time_format'] ?></p>
+                    <?php if($alerte[$nbAlert]['print_date'] != 2): ?>
+                        <p><?php echo $alerte[$nbAlert]['date_format'] ?><br/><?php echo $alerte[$nbAlert]['time_format'] ?></p>
+                    <?php endif; ?>
                     <p><?php echo nl2br($alerte[$nbAlert]['description']) ?></p>
                     <a class="button" href="<?php echo $alerte[$nbAlert]['post_url'] ?>" title="<?php echo apply_filters( 'the_title', $alerte[$nbAlert]['post_title']) ?>">En savoir plus</a>
                 </div>
@@ -73,7 +76,9 @@
             <?php if(isset($alerte[$nbAlert])): ?>
                 <div class="info-wrapper has-text-centered alerte">
                     <h3><?php echo apply_filters( 'the_title', $alerte[$nbAlert]['post_title']) ?></h3>
-                    <p><?php echo $alerte[$nbAlert]['date_format'] ?><br/><?php echo $alerte[$nbAlert]['time_format'] ?></p>
+                    <?php if($alerte[$nbAlert]['print_date'] != 2): ?>
+                        <p><?php echo $alerte[$nbAlert]['date_format'] ?><br/><?php echo $alerte[$nbAlert]['time_format'] ?></p>
+                    <?php endif; ?>
                     <p><?php echo nl2br($alerte[$nbAlert]['description']) ?></p>
                     <a class="button" href="<?php echo $alerte[$nbAlert]['post_url'] ?>" title="<?php echo apply_filters( 'the_title', $alerte[$nbAlert]['post_title']) ?>">En savoir plus</a>
                 </div>
