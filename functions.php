@@ -350,6 +350,8 @@ function add_js_scripts() {
     wp_enqueue_style('normalize', get_template_directory_uri().'/css/normalize.css');
     wp_enqueue_style('font-awesome', get_template_directory_uri().'/css/font-awesome.min.css');
     wp_enqueue_style('featherlight', get_template_directory_uri().'/css/featherlight.css');
+    wp_enqueue_style('maps', get_template_directory_uri().'/css/maps.css');
+    wp_enqueue_script( 'maps', get_template_directory_uri().'/js/maps.js', array('jquery'), '1.0', true );
     wp_enqueue_script( 'featherlight', get_template_directory_uri().'/js/featherlight.js', array('jquery'), '1.0', true );
     wp_enqueue_script( 'script_theme', get_template_directory_uri().'/js/scripts.js', array('jquery'), '1.0', true );
     wp_enqueue_script( 'sticky', get_template_directory_uri().'/js/sticky.js', array('jquery'), '1.0', true );
@@ -375,10 +377,18 @@ add_action( 'add_meta_boxes', 'add_blocs_hauts' );
 add_action( 'save_post', 'save_blocs_hauts' );
 function add_blocs_hauts()
 {
+    $post = get_post();
+    if($post->ID == 219) {
+        add_meta_box( 'blocs_header', "Blocs Stage, notifications, ...", 'add_bloc_header', 'page', 'normal', 'high' );
+        add_meta_box( 'blocs_home', "Blocs Bas Page d'Accueil", 'add_bloc_home', 'page', 'normal', 'high' );
+    } else {
+        add_meta_box('bloc_accueil', "Remplir si cette page doit apparaitre en bloc sur la page d'accueil", 'add_champs_accueil', null, 'normal', 'high');
+    }
     add_meta_box( 'bloc_haut_1', 'Bloc Haut 1', 'add_bloc_haut', 'page', 'normal', 'high', array('nb' => 1) );
     add_meta_box( 'bloc_haut_2', 'Bloc Haut 2', 'add_bloc_haut', 'page', 'normal', 'high', array('nb' => 2) );
     add_meta_box( 'bloc_haut_3', 'Bloc Haut 3', 'add_bloc_haut', 'page', 'normal', 'high', array('nb' => 3) );
     add_meta_box( 'bloc_haut_4', 'Bloc Haut 4', 'add_bloc_haut', 'page', 'normal', 'high', array('nb' => 4) );
+    add_meta_box( 'bloc_haut_5', 'Bloc Haut 5', 'add_bloc_haut', 'page', 'normal', 'high', array('nb' => 5) );
     wp_enqueue_script( 'add-meta-box-blocs-hauts', get_bloginfo('template_url').'/js/scripts-admin.js', array( 'jquery','media-upload','thickbox' ) );
     add_editor_style('css/editor-style.css');
 }
@@ -389,12 +399,119 @@ function save_blocs_hauts( $post_id ) {
 
     $allowed = array('a' => array('href' => array()));
 
-    for($i = 1; $i <= 4; $i++) {
+    for($i = 1; $i <= 5; $i++) {
         foreach(array('titre', 'position', 'url', 'image', 'texte', 'ajax') as $field) {
-            if(isset($_POST['bloc_haut_'.$field.'_'.$i]))
+            if(isset($_POST['bloc_haut_'.$field.'_'.$i]) || $field == 'ajax')
                 update_post_meta($post_id, 'bloc_haut_'.$field.'_'.$i, esc_attr($_POST['bloc_haut_'.$field.'_'.$i], $allowed));
         }
     }
+    if($post_id == 219) {
+        save_blocs_home( $post_id );
+    }
+    if($post_id == 219) {
+        save_blocs_header( $post_id );
+    }
+}
+function save_blocs_home( $post_id ) {
+    if( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return;
+    if( !isset( $_POST['meta_box_nonce'] ) || !wp_verify_nonce( $_POST['meta_box_nonce'], 'my_meta_box_nonce' ) ) return;
+    if( !current_user_can( 'edit_post' ) ) return;
+
+    $allowed = array('a' => array('href' => array()));
+
+    for($i = 1; $i < 7; $i++) {
+        if(isset($_POST['bloc_home_'.$i]))
+            update_post_meta($post_id, 'bloc_home_'.$i, esc_attr($_POST['bloc_home_'.$i], $allowed));
+    }
+}
+
+function save_blocs_header( $post_id ) {
+    if( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return;
+    if( !isset( $_POST['meta_box_nonce'] ) || !wp_verify_nonce( $_POST['meta_box_nonce'], 'my_meta_box_nonce' ) ) return;
+    if( !current_user_can( 'edit_post' ) ) return;
+
+    $allowed = array('a' => array('href' => array()));
+
+    if(isset($_POST['bloc_header_gauche']))
+        update_post_meta($post_id, 'bloc_header_gauche', esc_attr($_POST['bloc_header_gauche'], $allowed));
+    if(isset($_POST['bloc_header_droite']))
+        update_post_meta($post_id, 'bloc_header_droite', esc_attr($_POST['bloc_header_droite'], $allowed));
+}
+
+function add_champs_home_post_select($id, $i, $value) {
+    echo '<select name="bloc_home_'.$i.'" id="bloc_home_'.$i.'">';
+    echo '<option value="">Sélectionner le bloc '.$i.'</option>';
+
+    $args = array(
+        'post__not_in' => array($id, 2, 66, 1276),
+        'post_type'    => array('page', 'post'),
+        'numberposts'      => 200,
+        'posts_per_page'        => 200,
+        'orderby' => 'title',
+        'order' => 'ASC',
+    );
+
+    $posts = new WP_Query ( $args );
+    if ($posts && $posts->posts) {
+        foreach ( $posts->posts as $post ) {
+            echo '<option value="'.$post->ID.'" data-type="'.$post->post_type.'"'.(($post->ID == $value) ? 'selected="selected"' : '').'>'.$post->post_title.'</option>';
+        }
+    }
+
+    echo '</select>';
+}
+
+function add_champs_header_post_select($id, $i, $value) {
+    echo '<select name="bloc_header_'.$i.'" id="bloc_header_'.$i.'">';
+    echo '<option value="">Sélectionner le bloc '.$i.'</option>';
+
+    $args = array(
+        'post_type'    => 'post',
+        'numberposts'      => 200,
+        'category' => array(1, 19, 18),
+        'posts_per_page'        => 200,
+        'orderby' => 'date',
+        'order' => 'DESC',
+    );
+    $posts = get_posts($args);
+    if ($posts && $posts) {
+        foreach ( $posts as $post ) {
+            $infos = get_bloc_stage($post->ID);
+            echo '<option value="'.$post->ID.'" data-type="'.$post->post_type.'"'.(($post->ID == $value) ? 'selected="selected"' : '').'>'.$post->post_title.' ('.$infos['date_format'].')</option>';
+        }
+    }
+
+    echo '</select>';
+
+}
+
+function add_bloc_home( $post ) {
+    $values = get_post_custom($post->ID);
+
+    echo '<p>';
+    for($i = 1; $i < 7; $i++) {
+        $id = isset( $values['bloc_home_'.$i] ) ? esc_attr( $values['bloc_home_'.$i][0] ) : '';
+        add_champs_home_post_select($post->ID, $i, $id);
+    }
+    echo '</p>';
+    echo '<script>';
+    echo 'jQuery("#blocs_home").appendTo(jQuery("#titlediv"));';
+    echo '</script>';
+}
+
+function add_bloc_header( $post ) {
+    $values = get_post_custom($post->ID);
+
+    $h1 = isset( $values['bloc_header_gauche'] ) ? esc_attr( $values['bloc_header_gauche'][0] ) : '';
+    $h2 = isset( $values['bloc_header_droite'] ) ? esc_attr( $values['bloc_header_droite'][0] ) : '';
+    echo '<p>Bloc de gauche : ';
+    add_champs_header_post_select($post->ID, 'gauche', $h1);
+    echo '</p><p>Bloc de droite : ';
+    add_champs_header_post_select($post->ID, 'droite', $h2);
+    echo '</p>';
+    echo '<script>';
+    echo 'jQuery("#blocs_header").appendTo(jQuery("#titlediv"));';
+    echo '</script>';
 }
 
 function add_bloc_haut( $post, $metabox ) {
@@ -422,6 +539,9 @@ function add_bloc_haut( $post, $metabox ) {
     <p>
         <textarea name="bloc_haut_texte_<?php echo $nb ?>" id="bloc_haut_texte_<?php echo $nb ?>" placeholder="Texte du bloc" style="resize:both;width:100%;height:5em;"><?php echo $texte; ?></textarea>
     </p>
+    <script>
+        jQuery("#bloc_haut_<?php echo $nb ?>").appendTo(jQuery("#titlediv"));
+    </script>
 
     <?php
 }
@@ -431,7 +551,7 @@ function get_blocs_hauts()
     $fields = get_post_custom();
     $blocs = array();
 //    var_dump(get_post());
-    for($i = 1; $i <= 4; $i++) {
+    for($i = 1; $i <= 5; $i++) {
         foreach(array('titre', 'position', 'url', 'image', 'texte', 'ajax') as $field) {
             if(isset($fields['bloc_haut_'.$field.'_'.$i]) && $fields['bloc_haut_'.$field.'_'.$i][0]) {
                 if(!isset($blocs['bloc_'.$fields['bloc_haut_position_'.$i][0]]))
@@ -460,7 +580,7 @@ function is_blocs_hauts_ajax()
     $fields = get_post_custom();
     $blocs = array();
 
-    for($i = 1; $i <= 4; $i++) {
+    for($i = 1; $i <= 5; $i++) {
         if(isset($fields['bloc_haut_ajax_'.$i]) && $fields['bloc_haut_ajax_'.$i][0]) {
             return true;
         }
@@ -474,12 +594,13 @@ function is_blocs_hauts_ajax()
 /***********************************************************************/
 add_action( 'add_meta_boxes', 'add_bloc_stage' );
 add_action( 'save_post', 'save_bloc_stage' );
+add_action( 'save_post', 'save_bloc_accueil' );
 function add_bloc_stage()
 {
+    add_meta_box('bloc_accueil', "Remplir si cet article doit apparaitre en bloc bas sur la page d'accueil", 'add_champs_accueil', 'post', 'normal', 'high');
     add_meta_box('bloc_stage', "Remplir si c'est un stage OU une alerte", 'add_champs_stage', 'post', 'normal', 'high');
     wp_enqueue_script('jquery-ui-datepicker');
     wp_register_style('jquery-ui-datepicker', get_bloginfo('template_url').'/css/datepicker.css');
-//    wp_register_style('jquery-ui', 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/smoothness/jquery-ui.css', array('jquery-ui-core'));
     wp_enqueue_style('jquery-ui-datepicker');
 }
 function save_bloc_stage($post_id) {
@@ -489,12 +610,48 @@ function save_bloc_stage($post_id) {
 
     $allowed = array('a' => array('href' => array()));
 
-    foreach(array('date', 'starttime', 'endtime', 'adresse', 'codepostal', 'ville', 'telephone', 'description') as $field) {
-        if(isset($_POST['bloc_stage_'.$field]) && $_POST['bloc_stage_'.$field])
+    foreach(array('date', 'starttime', 'endtime', 'adresse', 'codepostal', 'ville', 'telephone', 'description', 'print_date') as $field) {
+        if(isset($_POST['bloc_stage_'.$field]))
             update_post_meta($post_id, 'bloc_stage_'.$field, esc_attr($_POST['bloc_stage_'.$field], $allowed));
     }
 }
 
+function save_bloc_accueil($post_id) {
+    if( defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
+    if(!isset($_POST['meta_box_nonce']) || !wp_verify_nonce($_POST['meta_box_nonce'], 'my_meta_box_nonce')) return;
+    if(!current_user_can( 'edit_post')) return;
+
+    $allowed = array('a' => array('href' => array()));
+
+    foreach(array('titre', 'image', 'description') as $field) {
+        if(isset($_POST['bloc_accueil_'.$field]))
+            update_post_meta($post_id, 'bloc_accueil_'.$field, esc_attr($_POST['bloc_accueil_'.$field], $allowed));
+    }
+}
+
+function add_champs_accueil($post) {
+    $values = get_post_custom($post->ID);
+
+    $infos = array();
+    $infos['titre'] = isset($values['bloc_accueil_titre']) ? esc_attr($values['bloc_accueil_titre'][0]) : '';
+    $infos['image'] = isset($values['bloc_accueil_image']) ? esc_attr($values['bloc_accueil_image'][0]) : '';
+    $infos['description'] = isset($values['bloc_accueil_description']) ? esc_attr($values['bloc_accueil_description'][0]) : '';
+    ?>
+    <p>
+        <input id="bloc_accueil_titre" style="width: 450px;" type="text" name="bloc_accueil_titre" value="<?php echo $infos['titre']; ?>" placeholder="Titre" />
+    </p>
+    <p>
+        <textarea name="bloc_accueil_description" id="bloc_accueil_description" placeholder="Texte du bloc" style="resize:both;width:100%;height:5em;"><?php echo $infos['description']; ?></textarea>
+    </p>
+    <p>
+        <input id="bloc_accueil_image" style="width: 450px;" type="text" name="bloc_accueil_image" value="<?php echo esc_url($infos['image']); ?>" />
+        <input id="bloc_accueil_image_upload" data-input="bloc_accueil_image" class="button-secondary bloc_accueil_image_upload" type="button" value="Choisir image" />
+    </p>
+    <script>
+        jQuery('#bloc_accueil').appendTo(jQuery('#titlediv'));
+    </script>
+    <?php
+}
 function add_champs_stage_time_select($type, $value) {
     echo '<select name="bloc_stage_'.$type.'" style="width:70px" id="bloc_stage_"'.$type.'>';
     for($h = 8; $h <= 23; $h++) {
@@ -520,10 +677,12 @@ function add_champs_stage($post) {
     $infos['ville'] = isset($values['bloc_stage_ville']) ? esc_attr($values['bloc_stage_ville'][0]) : 'Paris';
     $infos['telephone'] = isset($values['bloc_stage_telephone']) ? esc_attr($values['bloc_stage_telephone'][0]) : '06 12 06 87 51';
     $infos['description'] = isset($values['bloc_stage_description']) ? esc_attr($values['bloc_stage_description'][0]) : '';
+    $infos['print_date'] = isset($values['bloc_stage_print_date']) ? esc_attr($values['bloc_stage_print_date'][0]) : '';
     ?>
     <p>
         <div style="width:80px;display:inline-block;">Le </div><input style="width:100px" autocomplete="off" tabindex="2000" placeholder="jour" class="hasdatepicker" name="bloc_stage_date" id="bloc_stage_date" value="<?php echo $infos['date'] ?>" type="text" />
         de <?php add_champs_stage_time_select('starttime', $infos['starttime']); ?> à <?php add_champs_stage_time_select('endtime', $infos['endtime']); ?>
+        Afficher la date <select name="bloc_stage_print_date"><option value="1" <?php echo (($infos['print_date'] == 1) ? 'selected="selected"' : '') ?>>Oui</option><option value="2" <?php echo (($infos['print_date'] == 2) ? 'selected="selected"' : '') ?>>Non</option></select>
     </p>
     <p>
         <div style="width:80px;display:inline-block;">Lieu :  </div><input  placeholder="adresse" tabindex="2000" name="bloc_stage_adresse" id="bloc_stage_adresse" value="<?php echo $infos['adresse'] ?>" type="text" />
@@ -536,18 +695,35 @@ function add_champs_stage($post) {
     <p>
     <div style="vertical-align:top;width:80px;display:inline-block;">Description : </div><textarea style="resize:both;width:100%;height:5em;" placeholder="Description" tabindex="2000" name="bloc_stage_description" id="bloc_stage_description"><?php echo $infos['description'] ?></textarea>
     </p>
+    <script>
+        jQuery('#bloc_stage').appendTo(jQuery('#titlediv'));
+    </script>
     <?php
 }
 
 function get_is_stage($id = null)
 {
     foreach(get_the_category($id) as $categ) {
-        if(in_array($categ->category_nicename, array('stages', 'attention'))) {
+        if(in_array($categ->category_nicename, array('stages', 'notifications', 'cours'))) {
             return true;
             break;
         }
     }
     return false;
+}
+
+function tango_get_blocs_bas()
+{
+    $fields = get_post_custom();
+    $blocs = array();
+    for($i = 1; $i <= 6; $i++) {
+        if(isset($fields['bloc_home_'.$i]) && $fields['bloc_home_'.$i][0]) {
+            $blocTmp = get_post_custom($fields['bloc_home_'.$i][0]);
+            $blocTmp['url'] = get_the_permalink($fields['bloc_home_'.$i][0]);
+            $blocs[] = array('titre' => $blocTmp['bloc_accueil_titre'][0], 'image' => $blocTmp['bloc_accueil_image'][0], 'description' => nl2br($blocTmp['bloc_accueil_description'][0]), 'url' => $blocTmp['url']);
+        }
+    }
+    return $blocs;
 }
 
 function get_bloc_stage($id = null)
@@ -556,7 +732,7 @@ function get_bloc_stage($id = null)
     $infos = array();
 
     if(get_is_stage($id)) {
-        foreach (array('date', 'starttime', 'endtime', 'adresse', 'codepostal', 'ville', 'telephone', 'description') as $field) {
+        foreach (array('date', 'starttime', 'endtime', 'adresse', 'codepostal', 'ville', 'telephone', 'description', 'print_date') as $field) {
             if (isset($fields['bloc_stage_' . $field]) && $fields['bloc_stage_' . $field][0]) {
                 $infos[$field] = $fields['bloc_stage_' . $field][0];
             }
@@ -585,6 +761,9 @@ add_filter( 'excerpt_more', 'wpdocs_excerpt_more' );
 /***********************************************************************/
 //  Récupération du dernier stage et de la dernière alerte
 /***********************************************************************/
+function get_header_gauche() {
+
+}
 function next_stage() {
     $args = array(
         'post_type' => 'post',
@@ -617,8 +796,7 @@ function next_stage() {
 function next_alerte($offset = 1) {
     $args = array(
         'post_type' => 'post',
-//        'numberposts' => 1, // we need only the latest post, so get that post only
-        'category' => 1, // Use the category id, can also replace with category_name which uses category slug
+        'category' => array(1, 19), // Use the category id, can also replace with category_name which uses category slug
         'orderby' => 'date',
         'order' => 'DESC'
     );
@@ -634,10 +812,7 @@ function next_alerte($offset = 1) {
             if(strtotime($temp['date'].' '.str_replace('h', ':', $temp['endtime']).':00') < time()) {
                 break;
             }
-//            if(!count($infos)) $infos = array($temp);
-//            if($infos && strtotime($temp['date'].' '.str_replace('h', ':', $temp['endtime']).':00') < strtotime($infos['date'].' '.str_replace('h', ':', $infos['endtime']).':00')) {
-                $infos[] = $temp;
-//            }
+            $infos[] = $temp;
         }
     }
     usort($infos, function ($item1, $item2) {
@@ -817,7 +992,7 @@ function tango_get_categories()
     $actual = get_the_category(get_post()->ID)[0];
     $list = array();
     foreach($categories as $category) {
-        if(in_array($category->category_nicename, array('conseils-pratiques', 'edito', 'stages'))) {
+        if(in_array($category->category_nicename, array('conseils-pratiques', 'reflexions', 'stages'))) {
             if($actual->category_nicename == $category->category_nicename)
                 $category->is_selected = true;
             $list[] = $category;
@@ -830,7 +1005,7 @@ function tango_get_recents()
     $args = array(
         'post_type' => 'post',
         'numberposts' => 5, // we need only the latest post, so get that post only
-        'category' => array(14, 16, 18), // Use the category id, can also replace with category_name which uses category slug
+        'category' => array(14, 16), // Use the category id, can also replace with category_name which uses category slug
         'orderby' => 'date',
         'order' => 'DESC'
     );
