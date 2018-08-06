@@ -28,12 +28,15 @@
     background-color:#c42a1a;
     opacity:1;
 }
+#content .tile article.box {
+    padding:5px;
+}
 #sticky-box-1 {
     display:none;
 }
 .open-more {
     overflow: hidden;
-    margin-bottom: 15px;
+    /*margin-bottom: 15px;*/
     position:relative;
 }
 .open-more.even-desktop .desktop-hidden, .open-more.even-desktop.fondu .action {
@@ -83,7 +86,7 @@
 .open-more a.button.less, .open-more a.button.more {
     background-color: transparent;
     color: #4a4a4a;
-    bottom: -8px;
+    bottom: -10px;
     left: 50%;
     position:absolute;
     transform: translateX(-50%);
