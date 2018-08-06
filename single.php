@@ -5,7 +5,7 @@
             <?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
                 <?php get_template_part( 'entry' ); ?>
             <?php endwhile; endif; ?>
-            <div class="written_date">Rédigé le <?php the_time(get_option('date_format')); ?></div>
+<!--            <div class="written_date">Rédigé le --><?php //the_time(get_option('date_format')); ?><!--</div>-->
             <div class="level">
                 <?php list($prev, $next) = get_pagination(); ?>
                 <div class="level-left">
