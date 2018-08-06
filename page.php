@@ -29,7 +29,7 @@
 <?php if(is_front_page()): ?>
     <section>
         <div>
-            <div id='gmap-home'></div>
+            <div id='gmap-home'data-isloaded style="background-position: center;background-size: cover;background-image:url(http://s331430828.onlinehome.fr/wp-content/themes/tangoKHSB/images/maps.png)"></div>
         </div>
     </section>
     <script>

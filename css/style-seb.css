@@ -425,6 +425,13 @@ img.aligncenter {
     text-align:center;
 }
 
+section.header-image .info-wrapper.address {
+    top: 5%;
+    left: 10%;
+    bottom: auto;
+    width: 10%;
+}
+
 @media (min-width: 769px) {
     section.header-image .info-wrapper {
         width:20%;
@@ -468,6 +475,12 @@ img.aligncenter {
     section.header-image .info-wrapper {
         width:80%;
         left:10%;
+    }
+    section.header-image .info-wrapper.address {
+        top: 5%;
+        left: 5%;
+        bottom: auto;
+        width: 31%;
     }
     section.header-image .info-wrapper p {
         width:50%;

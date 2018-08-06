@@ -83,6 +83,9 @@
                     <a class="button" href="<?php echo $alerte[$nbAlert]['post_url'] ?>" title="<?php echo apply_filters( 'the_title', $alerte[$nbAlert]['post_title']) ?>">En savoir plus</a>
                 </div>
             <?php endif; ?>
+            <div class="info-wrapper has-text-centered address">
+                <a id="tomap" href="#gmap-home">35 rue Jussieu<br/>75005<br/>PARIS</a>
+            </div>
         <?php endif; ?>
     </section>
     <?php endif; ?>

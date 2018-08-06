@@ -116,8 +116,18 @@ jQuery(document).ready(function($) {
         ) {
             var anchor = jQuery(this.hash);
             anchor = anchor.length ? anchor : jQuery("[name=" + this.hash.slice(1) +"]");
+            var offsetHeight = parseInt(jQuery('.is-fixed-top').height());
+            if(jQuery('#sticky-box-1') && jQuery('#sticky-box-1').attr('id')) {
+                offsetHeight += jQuery(this).height();
+                if(jQuery(window).width() <= 768) {
+                    offsetHeight += jQuery(this).siblings().length * jQuery(this).height() + 40;
+                }
+            } else {
+                offsetHeight += jQuery(this).height();
+            }
+
             if ( anchor.length ) {
-                jQuery("html, body").animate( { scrollTop: anchor.offset().top }, 1500);
+                jQuery("html, body").animate( { scrollTop: anchor.offset().top-offsetHeight }, 1500);
             }
         }
     });
@@ -189,26 +199,46 @@ jQuery(document).ready(function($) {
     });
 
     if(locationIQAddresses.length) {
-        jQuery.each(locationIQAddresses, function(index) {
-            jQuery.get(
-                'https://eu1.locationiq.com/v1/search.php?key=5a330af4061011&q='+encodeURIComponent(locationIQAddresses[index].address)+'&format=json', null,
-                function(response){
-                    var lat = response[0].lat;
-                    var lon = response[0].lon;
 
-                    mapboxgl.accessToken = 'pk.eyJ1IjoidGFuZ29wb2xpcyIsImEiOiJjamtpMXZlbHgweHpzM3BtaTl0ZTRhNnd1In0.9cE9jRa4VRf9OflojHnsNw';
-                    var map = new mapboxgl.Map({
-                        container: locationIQAddresses[index].container,
-                        center: [lon, lat],
-                        zoom: 15,
-                        style: 'mapbox://styles/mapbox/streets-v9'
-                    });
-                    map.addControl(new mapboxgl.NavigationControl());
-                    var marker = new mapboxgl.Marker();
-                    marker.setLngLat([lon, lat]);
-                    marker.addTo(map);
+        function generateMap() {
+            jQuery.each(locationIQAddresses, function(index) {
+                jQuery.get(
+                    'https://eu1.locationiq.com/v1/search.php?key=5a330af4061011&q='+encodeURIComponent(locationIQAddresses[index].address)+'&format=json', null,
+                    function(response){
+                        var lat = response[0].lat;
+                        var lon = response[0].lon;
+
+                        mapboxgl.accessToken = 'pk.eyJ1IjoidGFuZ29wb2xpcyIsImEiOiJjamtpMXZlbHgweHpzM3BtaTl0ZTRhNnd1In0.9cE9jRa4VRf9OflojHnsNw';
+                        var map = new mapboxgl.Map({
+                            container: locationIQAddresses[index].container,
+                            center: [lon, lat],
+                            zoom: 15,
+                            style: 'mapbox://styles/mapbox/streets-v9'
+                        });
+                        map.addControl(new mapboxgl.NavigationControl());
+                        var marker = new mapboxgl.Marker();
+                        marker.setLngLat([lon, lat]);
+                        marker.addTo(map);
+                    }
+                );
+            });
+        }
+
+        if(jQuery('#gmap-home').length) {
+            jQuery('#gmap-home').on('mouseenter', function() {
+                if(!jQuery('#gmap-home').data('isloaded')) {
+                    jQuery('#gmap-home').data('isloaded', true);
+                    generateMap();
                 }
-            );
-        });
+            });
+            jQuery('#tomap').on('click', function() {
+                if(!jQuery('#gmap-home').data('isloaded')) {
+                    jQuery('#gmap-home').data('isloaded', true);
+                    generateMap();
+                }
+            });
+        } else {
+            generateMap();
+        }
     }
 });
