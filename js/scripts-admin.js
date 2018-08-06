@@ -19,6 +19,16 @@ jQuery(document).ready(function($) {
         // on empêche toute action supplémentaire
         return false;
     });
+
+    $('.bloc_accueil_image_upload').click(function() {
+        $('html').addClass('pdf');
+        // on cible notre champ
+        formfield = $(this).data('input');
+        // on charge la fenêtre
+        tb_show('', 'media-upload.php?type=image&TB_iframe=true');
+        // on empêche toute action supplémentaire
+        return false;
+    });
   
     // on duplique la function send_to_editor
     window.original_send_to_editor = window.send_to_editor;
