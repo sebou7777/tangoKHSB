@@ -7,6 +7,7 @@
     </div>
     <div class="tile is-vertical is-8">
         <div class="tile">
+            <?php if($infos['print_date'] != 2): ?>
             <div class="tile is-parent">
                 <article class="tile is-child box has-text-centered">
                     <i class="fa fa-calendar-alt fa-3x" aria-hidden="true"></i><br/>
@@ -14,6 +15,7 @@
                     de <?php echo $infos['starttime'] ?> à <?php echo $infos['endtime'] ?>
                 </article>
             </div>
+            <?php endif; ?>
             <div class="tile is-parent">
                 <article class="tile is-child box has-text-centered">
                     <i class="fa fa-address-card fa-3x" aria-hidden="true"></i><br/>
@@ -28,7 +30,7 @@
             </div>
         </div>
         <div class="tile is-parent">
-            <article class="tile is-child box">
+            <article class="tile is-child ">
                 <?php the_content() ?>
             </article>
         </div>
@@ -36,5 +38,5 @@
 </div>
 
 <script>
-    googleMapsAddresses.push({"address":"<?php echo $infos['adresse'] ?> <?php echo $infos['codepostal'] ?> <?php echo $infos['ville'] ?>", "title":"Ecole Victor", "zoom":"15", "pin_url":"", 'container':'gmap-stage'});
+    locationIQAddresses.push({"address":"<?php echo $infos['adresse'] ?> <?php echo $infos['codepostal'] ?> <?php echo $infos['ville'] ?>", "title":"Ecole Victor", "zoom":"15", "pin_url":"", 'container':'gmap-stage'});
 </script>
