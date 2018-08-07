@@ -157,17 +157,6 @@ section.header-image.is-home {
     max-height:75vh;
 }
 
-
-section.header-image h1.title {
-    z-index: 29;
-    width: 50%;
-    margin: auto;
-    text-transform: uppercase;
-    color: #FF590D;
-    text-align: center;
-    font-size:50px;
-}
-
 p {
     text-align:justify;
 }

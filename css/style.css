@@ -22,13 +22,17 @@ img {
     margin-top: 30px;
 }
 
-.header-image h1{
-    margin: auto;
+.header-image h1.title{
+    margin: 20px auto;
     text-transform: uppercase;
     color: #FF590D;
     text-align: center;
-    font-size: 60px;
+    font-size: 50px;
     font-family: 'Raleway', sans-serif;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
 }
 @media screen and (max-width: 767px) {
     .header-image h1{
