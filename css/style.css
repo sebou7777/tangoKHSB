@@ -489,6 +489,33 @@ a:active{
 
 }*/
 
+
+.content.img-text-block {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+.img-block {
+    width: 30%;
+}
+
+.text-block {
+    width: 65%;
+}
+
+@media only screen and (max-width: 767px) {
+    .img-block {
+        display: none;
+    }
+
+    .text-block {
+        width: 100%;
+    }
+}
+
+
+
 .entry-date{
     color: #8C8B8F;
 }
