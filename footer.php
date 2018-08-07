@@ -1,3 +1,10 @@
+<?php if(!is_front_page()): ?>
+    <section>
+        <div>
+            <div id="gmap"></div>
+        </div>
+    </section>
+<?php endif; ?>
 <footer class="footer">
     <div class="container">
         <div class="columns">

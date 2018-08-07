@@ -18,8 +18,8 @@
     <?php if(is_front_page()): ?>
         <?php $edito = last_edito(); ?>
         <section class="box container open-more" style="margin-top:30px;" data-open="Lire la suite" data-close="Fermer">
-            <div class="content">
-                <h2 class="has-text-centered"><?php echo $edito->post_title ?></h2>
+            <div class="wp-content content">
+<!--                <h2 class="has-text-centered">--><?php //echo $edito->post_title ?><!--</h2>-->
                 <?php echo apply_filters('the_content', $edito->post_content) ?>
             </div>
         </section>
