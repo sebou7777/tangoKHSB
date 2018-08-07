@@ -167,7 +167,8 @@ a:active{
     font-weight: 300;
     color: #000;
     text-decoration: unset;
-    font-size: 18px;
+    font-size: 16px;
+    padding: .5rem;
 }
 .tango-menu .navbar-link.is-active,
 .tango-menu .navbar-link:hover,
@@ -266,9 +267,9 @@ a:active{
 }
 
 .footer a{
-    font-size: 20px;
+    font-size: 18px;
     line-height: 32px;
-    font-family: 'Wire One', sans-serif;
+    font-family: 'Raleway', sans-serif;
     color: white;
 }
 
@@ -316,7 +317,7 @@ a:active{
     left: 5%;
     width: 20%;
     /*height: 40%;*/
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.6);
     color: white;
     padding: 15px;
 }
@@ -409,7 +410,7 @@ a:active{
 
 .page-cards div>p{
     text-align: center;
-    font-size: 20px;
+    font-size: 18px;
     padding: 10px;
     color: black;
     text-shadow: 1px 0px 1px rgba(255, 255, 255, 1);
