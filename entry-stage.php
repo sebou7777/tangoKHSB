@@ -25,7 +25,7 @@
             <div class="tile is-parent">
                 <article class="tile is-child box has-text-centered">
                     <i class="fa fa-phone fa-3x" aria-hidden="true"></i><br/>
-                    <?php echo $infos['telephone'] ?>
+                    <br/><?php echo $infos['telephone'] ?>
                 </article>
             </div>
         </div>
