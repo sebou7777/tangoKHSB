@@ -18,8 +18,8 @@
     <?php if(is_front_page()): ?>
         <?php $edito = last_edito(); ?>
         <section class="box container open-more" style="margin-top:30px;" data-open="Lire la suite" data-close="Fermer">
-            <div class="content">
-                <h2 class="has-text-centered"><?php echo $edito->post_title ?></h2>
+            <div class="wp-content content">
+<!--                <h2 class="has-text-centered">--><?php //echo $edito->post_title ?><!--</h2>-->
                 <?php echo apply_filters('the_content', $edito->post_content) ?>
             </div>
         </section>
@@ -51,7 +51,7 @@
                     <div class="column open-more" data-open="Lire la suite" data-close="Fermer">
                         <div class="content">
                             <h2><?php echo $bloc['titre'] ?></h2>
-                            <?php if($bloc['image']): ?><img class="alignleft" src="<?php echo $bloc['image'] ?>" title="<?php echo $bloc['titre'] ?>" /><?php endif; ?>
+                            <?php if($bloc['image']): ?><img class="alignleft" src="<?php echo $bloc['image'] ?>" alt="<?php echo $bloc['titre'] ?>" title="<?php echo $bloc['titre'] ?>" /><?php endif; ?>
                             <p><?php echo $bloc['description'] ?></p>
                             <p class="has-text-right-desktop has-text-centered-mobile"><a class="button" title="<?php echo $bloc['titre'] ?>" href="<?php echo $bloc['url'] ?>">En savoir plus</a></p>
                         </div>
