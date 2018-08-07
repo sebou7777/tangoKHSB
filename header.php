@@ -15,11 +15,12 @@
         <div class="navbar-brand">
             <a class="navbar-item" href="/" title="TANGO ARGENTIN à Paris - Leah et Jean-Philippe">
             <?php if(is_front_page()): ?>
-                <h1 class="title-brand">TANGO ARGENTIN à Paris <br> <span>Leah et Jean-Philippe</span></h1>
+                <h1 class="title-brand">TANGO ARGENTIN à Paris <span>Leah et Jean-Philippe</span></h1>
             <?php else: ?>
-                <p class="title-brand">TANGO ARGENTIN à Paris <br> <span>Leah et Jean-Philippe</span></p>
+                <p class="title-brand">TANGO ARGENTIN à Paris <span>Leah et Jean-Philippe</span></p>
             <?php endif; ?>
             </a>
+            <a id="tomap" href="#<?php echo ((is_front_page()) ? 'gmap-home' : 'gmap') ?>" title="Ecole Victor"><i class="fas fa-map-marker-alt"></i> 35 rue Jussieu 75005 PARIS</a>
             <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false" title="TANGO ARGENTIN à Paris - Menu Mobile">
                 <span aria-hidden="true"></span>
                 <span aria-hidden="true"></span>
@@ -53,39 +54,27 @@
         <?php if(!is_front_page()): ?>
             <h1 class="title"><?php echo tango_get_top_title() ?></h1>
         <?php else: ?>
-            <?php $alerte = next_alerte(); $nbAlert = 0; ?>
-            <?php if($stage = next_stage()): ?>
+            <?php if($gauche = get_header_gauche()): ?>
                 <div class="info-wrapper has-text-centered">
-                    <h3>PROCHAIN STAGE</h3>
-                    <p><?php echo $stage['date_format'] ?><br/><?php echo $stage['time_format'] ?></p>
-                    <p><?php echo nl2br($stage['description']) ?></p>
-                    <a class="button" href="<?php echo $stage['post_url'] ?>" title="<?php echo apply_filters( 'the_title', $stage['post_title']) ?>">En savoir plus</a>
-                </div>
-            <?php elseif(isset($alerte[$nbAlert])): ?>
-                <div class="info-wrapper has-text-centered">
-                    <h3><?php echo apply_filters( 'the_title', $alerte[$nbAlert]['post_title']) ?></h3>
-                    <?php if($alerte[$nbAlert]['print_date'] != 2): ?>
-                        <p><?php echo $alerte[$nbAlert]['date_format'] ?><br/><?php echo $alerte[$nbAlert]['time_format'] ?></p>
+                    <h3><?php echo $gauche['titre'] ?></h3>
+                    <?php if($gauche['print_date'] != 2): ?>
+                        <p><?php echo $gauche['date_format'] ?><br/><?php echo $gauche['time_format'] ?></p>
                     <?php endif; ?>
-                    <p><?php echo nl2br($alerte[$nbAlert]['description']) ?></p>
-                    <a class="button" href="<?php echo $alerte[$nbAlert]['post_url'] ?>" title="<?php echo apply_filters( 'the_title', $alerte[$nbAlert]['post_title']) ?>">En savoir plus</a>
+                    <p><?php echo nl2br($gauche['description']) ?></p>
+                    <a class="button" href="<?php echo $gauche['post_url'] ?>" title="<?php echo apply_filters( 'the_title', $gauche['titre']) ?>">En savoir plus</a>
                 </div>
-                <?php $nbAlert++ ?>
             <?php endif; ?>
 
-            <?php if(isset($alerte[$nbAlert])): ?>
+            <?php if($droite = get_header_droite((isset($gauche['post_id'])) ? $gauche['post_id'] : null)): ?>
                 <div class="info-wrapper has-text-centered alerte">
-                    <h3><?php echo apply_filters( 'the_title', $alerte[$nbAlert]['post_title']) ?></h3>
-                    <?php if($alerte[$nbAlert]['print_date'] != 2): ?>
-                        <p><?php echo $alerte[$nbAlert]['date_format'] ?><br/><?php echo $alerte[$nbAlert]['time_format'] ?></p>
+                    <h3><?php echo apply_filters( 'the_title', $droite['titre']) ?></h3>
+                    <?php if($droite['print_date'] != 2): ?>
+                        <p><?php echo $droite['date_format'] ?><br/><?php echo $droite['time_format'] ?></p>
                     <?php endif; ?>
-                    <p><?php echo nl2br($alerte[$nbAlert]['description']) ?></p>
-                    <a class="button" href="<?php echo $alerte[$nbAlert]['post_url'] ?>" title="<?php echo apply_filters( 'the_title', $alerte[$nbAlert]['post_title']) ?>">En savoir plus</a>
+                    <p><?php echo nl2br($droite['description']) ?></p>
+                    <a class="button" href="<?php echo $droite['post_url'] ?>" title="<?php echo apply_filters( 'the_title', $droite['titre']) ?>">En savoir plus</a>
                 </div>
             <?php endif; ?>
-            <div class="info-wrapper has-text-centered address">
-                <a id="tomap" href="#gmap-home">35 rue Jussieu<br/>75005<br/>PARIS</a>
-            </div>
         <?php endif; ?>
     </section>
     <?php endif; ?>
