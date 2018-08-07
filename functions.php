@@ -293,7 +293,7 @@ add_filter( 'post_row_actions', 'rd_duplicate_post_link', 10, 2 );
 /***********************************************************************/
 function add_defer_attribute($tag, $handle) {
     // add script handles to the array below
-    $scripts_to_defer = array('script_theme', 'jquery-core', 'jquery-migrate', 'script_maps', 'validate', 'sticky', 'featherlight');
+    $scripts_to_defer = array('script_theme', 'jquery-core', 'jquery-migrate', 'maps', 'validate', 'sticky', 'featherlight');
 
     foreach($scripts_to_defer as $defer_script) {
         if ($defer_script === $handle) {
@@ -350,8 +350,10 @@ function add_js_scripts() {
     wp_enqueue_style('normalize', get_template_directory_uri().'/css/normalize.css');
     wp_enqueue_style('font-awesome', get_template_directory_uri().'/css/font-awesome.min.css');
     wp_enqueue_style('featherlight', get_template_directory_uri().'/css/featherlight.css');
-    wp_enqueue_style('maps', get_template_directory_uri().'/css/maps.css');
-    wp_enqueue_script( 'maps', get_template_directory_uri().'/js/maps.js', array('jquery'), '1.0', true );
+    wp_enqueue_style('fonts-googleapis', get_template_directory_uri().'/css/fonts.googleapis.css');
+    wp_enqueue_style('maps', 'https://api.mapbox.com/mapbox.js/v3.0.1/mapbox.css');
+    wp_enqueue_script( 'maps', 'https://api.mapbox.com/mapbox.js/v3.0.1/mapbox.js', array('jquery'), '1.0', true );
+
     wp_enqueue_script( 'featherlight', get_template_directory_uri().'/js/featherlight.js', array('jquery'), '1.0', true );
     wp_enqueue_script( 'script_theme', get_template_directory_uri().'/js/scripts.js', array('jquery'), '1.0', true );
     wp_enqueue_script( 'sticky', get_template_directory_uri().'/js/sticky.js', array('jquery'), '1.0', true );
@@ -762,9 +764,50 @@ add_filter( 'excerpt_more', 'wpdocs_excerpt_more' );
 //  Récupération du dernier stage et de la dernière alerte
 /***********************************************************************/
 function get_header_gauche() {
+    $fields = get_post_custom();
 
+    if(isset($fields['bloc_header_gauche'][0]) && $fields['bloc_header_gauche'][0]) {
+        $temp = get_bloc_stage($fields['bloc_header_gauche'][0]);
+        $post = get_post($fields['bloc_header_gauche'][0]);
+        $temp['post_url'] = get_the_permalink($post);
+        $temp['post_id'] = $post->ID;
+        if(get_the_category($fields['bloc_header_gauche'][0]) == 18) {
+            $temp['titre'] = 'PROCHAIN STAGE';
+        } else {
+            $temp['titre'] = $post->post_title;
+        }
+        if(strtotime($temp['date'].' '.str_replace('h', ':', $temp['endtime']).':00') > time()) {
+            return $temp;
+        }
+    }
+    if($stage = next_stage()) {
+        return $stage;
+    }
+    return next_alerte();
 }
-function next_stage() {
+function get_header_droite($exclude = null) {
+    $fields = get_post_custom();
+
+    if(isset($fields['bloc_header_droite'][0]) && $fields['bloc_header_droite'][0]) {
+        $temp = get_bloc_stage($fields['bloc_header_droite'][0]);
+        $post = get_post($fields['bloc_header_droite'][0]);
+        $temp['post_url'] = get_the_permalink($post);
+        $temp['post_id'] = $post->ID;
+        if(get_the_category($fields['bloc_header_droite'][0]) == 18) {
+            $temp['titre'] = 'PROCHAIN STAGE';
+        } else {
+            $temp['titre'] = $post->post_title;
+        }
+        if(strtotime($temp['date'].' '.str_replace('h', ':', $temp['endtime']).':00') > time()) {
+            return $temp;
+        }
+    }
+    if($stage = next_stage()) {
+        return $stage;
+    }
+    return next_alerte();
+}
+function next_stage($exclude = null) {
     $args = array(
         'post_type' => 'post',
 //        'posts_per_page' => 1, // we need only the latest post, so get that post only
@@ -772,6 +815,8 @@ function next_stage() {
         'orderby' => 'date',
         'order' => 'DESC'
     );
+    if($exclude)
+        $args['post__not_in'] = $exclude;
 
     $posts = get_posts($args);
     $infos = null;
@@ -779,8 +824,10 @@ function next_stage() {
     if(count($posts)) {
         foreach($posts as $post) {
             $temp = get_bloc_stage($post->ID);
+            $temp['titre'] = 'PROCHAIN STAGE';
             $temp['post_title'] = $post->post_title;
             $temp['post_url'] = get_the_permalink($post);
+            $temp['post_id'] = $post->ID;
             if(strtotime($temp['date'].' '.str_replace('h', ':', $temp['endtime']).':00') < time()) {
                 break;
             }
@@ -793,13 +840,15 @@ function next_stage() {
     return $infos;
 }
 
-function next_alerte($offset = 1) {
+function next_alerte($exclude = null) {
     $args = array(
         'post_type' => 'post',
         'category' => array(1, 19), // Use the category id, can also replace with category_name which uses category slug
         'orderby' => 'date',
         'order' => 'DESC'
     );
+    if($exclude)
+        $args['post__not_in'] = $exclude;
 
     $posts = get_posts($args);
     $infos = array();
@@ -807,6 +856,7 @@ function next_alerte($offset = 1) {
     if(count($posts)) {
         foreach($posts as $post) {
             $temp = get_bloc_stage($post->ID);
+            $temp['titre'] = $post->post_title;
             $temp['post_title'] = $post->post_title;
             $temp['post_url'] = get_the_permalink($post);
             if(strtotime($temp['date'].' '.str_replace('h', ':', $temp['endtime']).':00') < time()) {
@@ -819,8 +869,7 @@ function next_alerte($offset = 1) {
         if ($item1['date'] == $item2['date']) return 0;
         return $item1['date'] < $item2['date'] ? -1 : 1;
     });
-
-    return $infos;
+    return $infos[0];
 }
 
 function last_edito() {
