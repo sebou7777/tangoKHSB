@@ -37,7 +37,7 @@
     </script>
 <?php endif; ?>
 
-<section id="content" class="container <?php echo ((is_front_page()) ? 'is-home' : '') ?>">
+<section id="content" class="container is-fluid <?php echo ((is_front_page()) ? 'is-home' : '') ?>">
 <?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
     <?php if(is_gallery()): ?>
         <?php get_template_part( 'gallery' ); ?>
@@ -49,11 +49,15 @@
             <?php foreach(tango_get_blocs_bas() as $bloc): ?>
                 <div class="columns 1-column">
                     <div class="column open-more" data-open="Lire la suite" data-close="Fermer">
-                        <div class="content">
-                            <h2><?php echo $bloc['titre'] ?></h2>
-                            <?php if($bloc['image']): ?><img class="alignleft" src="<?php echo $bloc['image'] ?>" title="<?php echo $bloc['titre'] ?>" /><?php endif; ?>
-                            <p><?php echo $bloc['description'] ?></p>
-                            <p class="has-text-right-desktop has-text-centered-mobile"><a class="button" title="<?php echo $bloc['titre'] ?>" href="<?php echo $bloc['url'] ?>">En savoir plus</a></p>
+                        <div class="content img-text-block">
+                            <div class="img-block">
+                                <?php if($bloc['image']): ?><img src="<?php echo $bloc['image'] ?>" title="<?php echo $bloc['titre'] ?>" /><?php endif; ?>
+                            </div>
+                            <div class="text-block">
+                                <h2><?php echo $bloc['titre'] ?></h2>
+                                <p><?php echo $bloc['description'] ?></p>
+                                <p class="has-text-right-desktop has-text-centered-mobile"><a class="button" title="<?php echo $bloc['titre'] ?>" href="<?php echo $bloc['url'] ?>">En savoir plus</a></p>
+                            </div>
                         </div>
                     </div>
                 </div>
