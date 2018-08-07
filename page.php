@@ -51,7 +51,7 @@
                     <div class="column open-more" data-open="Lire la suite" data-close="Fermer">
                         <div class="content img-text-block">
                             <div class="img-block">
-                                <?php if($bloc['image']): ?><img src="<?php echo $bloc['image'] ?>" title="<?php echo $bloc['titre'] ?>" /><?php endif; ?>
+                                <?php if($bloc['image']): ?><img src="<?php echo $bloc['image'] ?>" alt="<?php echo $bloc['titre'] ?>" title="<?php echo $bloc['titre'] ?>" /><?php endif; ?>
                             </div>
                             <div class="text-block">
                                 <h2><?php echo $bloc['titre'] ?></h2>
