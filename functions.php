@@ -335,9 +335,6 @@ add_action( 'wp_ajax_get_content_of_specific_page', 'get_content_of_specific_pag
 add_action( 'wp_ajax_nopriv_get_content_of_specific_page', 'get_content_of_specific_page' );
 
 
-//add_action( 'parse_request', 'wpcf7_control_init', 20 );
-//add_action( 'wp_enqueue_scripts', 'wpcf7_do_enqueue_scripts' );
-//add_action( 'wp_enqueue_scripts', 'wpcf7_html5_fallback', 20 );
 
 function add_js_scripts() {
     wp_enqueue_script( 'gallery', get_template_directory_uri().'/js/gallery.js', array('jquery'), '1.0', true);
