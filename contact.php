@@ -63,9 +63,9 @@
                 <div class="field is-horizontal">
                     <div class="field-body">
                         <div class="field">
-                            <div class="control">
+                            <p class="control">
                                 <textarea name="message" class="textarea" id="message" placeholder="Votre message" required></textarea>
-                            </div>
+                            </p>
                         </div>
                     </div>
                 </div>
