@@ -20,7 +20,7 @@
                 stickyActiveCSS : {
                     "position":"fixed", // Position "fixed" pour le mode Sticky. Ne pas modifier !
                     "width":"100%", // Recommandé de fixer la largeur à 100% pour ne pas avoir de bug
-                    "z-index":1, // Recommandé de fixer un fort z-index pour passer au-dessus des contenus
+                    "z-index":1001, // Recommandé de fixer un fort z-index pour passer au-dessus des contenus
                     "top":0 // Optionnel : permet ici de coller le bloc Sticky en haut du viewport
                 },
             }, args);
