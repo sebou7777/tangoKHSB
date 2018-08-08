@@ -29,7 +29,7 @@
 <?php if(is_front_page()): ?>
     <section>
         <div>
-            <div id='gmap-home'data-isloaded style="background-position: center;background-size: cover;background-image:url(http://s331430828.onlinehome.fr/wp-content/themes/tangoKHSB/images/maps.png)"></div>
+            <div id="gmap-home" style="background-position: center;background-size: cover;background-image:url(http://s331430828.onlinehome.fr/wp-content/themes/tangoKHSB/images/maps.png)"></div>
         </div>
     </section>
     <script>
@@ -48,7 +48,7 @@
             <?php echo get_the_content() ?>
             <?php foreach(tango_get_blocs_bas() as $bloc): ?>
                 <div class="columns 1-column">
-                    <div class="column open-more" data-open="Lire la suite" data-close="Fermer">
+                    <div class="column" data-open="Lire la suite" data-close="Fermer">
                         <div class="content img-text-block">
                             <div class="img-block">
                                 <?php if($bloc['image']): ?><img src="<?php echo $bloc['image'] ?>" alt="<?php echo $bloc['titre'] ?>" title="<?php echo $bloc['titre'] ?>" /><?php endif; ?>
