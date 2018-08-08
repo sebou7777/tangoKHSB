@@ -191,7 +191,8 @@ jQuery(document).ready(function($) {
         if(!s.hasClass('opened')){
             openMoreDefaultHeight = parseInt(s.css('height'));
             var h = s.find('.content').height();
-            s.animate({'height':h + 40}, 1000).addClass('opened');
+            var offset = parseInt(s.css('margin-top')) + parseInt(s.css('margin-bottom'));
+            s.animate({'height':h + offset + 20}, 1000).addClass('opened');
             s.find('a.button.more').hide();
             s.find('a.button.less').show();
         }else{
@@ -210,21 +211,11 @@ jQuery(document).ready(function($) {
                 function(response){
                     var lat = response[0].lat;
                     var lon = response[0].lon;
-                    console.log(lat+':'+lon);
 
-
-                    // mapboxgl.accessToken = 'pk.eyJ1IjoidGFuZ29wb2xpcyIsImEiOiJjamtpMXZlbHgweHpzM3BtaTl0ZTRhNnd1In0.9cE9jRa4VRf9OflojHnsNw';
-                    // var map = new mapboxgl.Map({
-                    //     container: locationIQAddresses[index].container,
-                    //     center: [lon, lat],
-                    //     zoom: 15,
-                    //     style: 'mapbox://styles/mapbox/streets-v9'
-                    // });
                     L.mapbox.accessToken = 'pk.eyJ1IjoidGFuZ29wb2xpcyIsImEiOiJjamtpMXZlbHgweHpzM3BtaTl0ZTRhNnd1In0.9cE9jRa4VRf9OflojHnsNw';
                     var map = L.mapbox.map(locationIQAddresses[index].container, 'mapbox.streets', {
                         scrollWheelZoom: false,
                     }).setView([lat, lon], 16);
-                    // L.mapbox.map(locationIQAddresses[index].container, 'mapbox.streets').setView([38.8929, -77.0252], 14);
 
                     var geojson = {
                         "type": "FeatureCollection",
@@ -240,23 +231,13 @@ jQuery(document).ready(function($) {
                                     "description": locationIQAddresses[index].address,
                                     "marker-color": "#FF590D",
                                     "marker-size": "medium",
-                                    // "marker-symbol": "building"
                                 }
                             }
                         ]
                     }
                     var myLayer = L.mapbox.featureLayer().addTo(map);
                     myLayer.setGeoJSON(geojson);
-
-
-
-                    // map.addControl(new mapboxgl.NavigationControl());
-                    // map.dragging.disable();
-                    // map.scrollWheelZoom.disable();
-                    // var marker = new mapboxgl.Marker();
-                    // marker.setLngLat([lon, lat]);
-                    // marker.setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('<b>'+locationIQAddresses[index].title+'</b><p>'+locationIQAddresses[index].address+'</p>'));
-                    // marker.addTo(map);
+                    jQuery('.leaflet-marker-icon').click();
                 }
             );
         });
@@ -282,12 +263,13 @@ jQuery(document).ready(function($) {
     }
 
     jQuery('#tomap').on('click', function() {
-        jQuery('#gmap').height('15rem');
-        locationIQAddresses.push({"address":"35 rue Jussieu 75005 Paris", "title":"Ecole Victor", "zoom":"15", "pin_url":"", 'container':'gmap'});
-        if(!jQuery('#gmap').data('isloaded')) {
-            jQuery('#gmap').data('isloaded', true);
-            generateMap();
+        if(jQuery('#gmap').length) {
+            jQuery('#gmap').height('15rem');
+            locationIQAddresses.push({"address":"35 rue Jussieu 75005 Paris", "title":"Ecole Victor", "zoom":"15", "pin_url":"", 'container':'gmap'});
+            if(!jQuery('#gmap').data('isloaded')) {
+                jQuery('#gmap').data('isloaded', true);
+                generateMap();
+            }
         }
-        // jQuery('#tomap').click();
     });
 });
