@@ -236,7 +236,7 @@ section.page-cards.page-cards-images a:hover h4 {
 #content.is-home .columns {
     /*background-color: #f3f3f3;*/
     border: 1px solid grey;
-    width:90%;
+    width:80%;
     margin-bottom:2rem;
 }
 #content.is-home .columns .column {
@@ -249,7 +249,7 @@ section.page-cards.page-cards-images a:hover h4 {
      margin-left:0;
 }
 #content.is-home .columns:nth-child(even) {
-    margin-left:10%;
+    margin-left:20%;
 }
 #content.is-home .columns .column h2 {
     margin: 10px;

@@ -502,11 +502,21 @@ a:active{
 }
 
 .img-block {
-    width: 30%;
+    /* width: 30%; */
+    flex: 1 0 auto;
+    display: inline-flex;
+    justify-content: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    align-content: center;
 }
 
 .text-block {
-    width: 65%;
+   flex: 1 100%;
+}
+
+.img-block + .text-block {
+    flex: 1 1 69%;
 }
 
 @media only screen and (max-width: 767px) {
