@@ -20,7 +20,7 @@
                 <p class="title-brand">TANGO ARGENTIN à Paris <span>Leah et Jean-Philippe</span></p>
             <?php endif; ?>
             </a>
-            <a id="tomap" href="#<?php echo ((is_front_page()) ? 'gmap-home' : 'gmap') ?>" title="Ecole Victor"><i class="fas fa-map-marker-alt"></i> 35 rue Jussieu 75005 PARIS</a>
+            <a id="tomap" href="#<?php echo ((is_front_page()) ? 'gmap-home' : 'gmap') ?>" title="Ecole Victor"><i class="fas fa-map-marker-alt"></i> 35 rue Jussieu 75005 PARIS - 06 12 06 87 51 <i class="fas fa-phone"></i></a>
             <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false" title="TANGO ARGENTIN à Paris - Menu Mobile">
                 <span aria-hidden="true"></span>
                 <span aria-hidden="true"></span>
