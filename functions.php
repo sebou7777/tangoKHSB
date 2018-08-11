@@ -79,7 +79,11 @@ if( !function_exists( 'te_css_replacetag' ) ) {
         return array("</body>","before");
     }
 }
-
+function prefix_add_footer_styles() {
+//    wp_enqueue_style( 'maps', get_template_directory_uri() . '/stylesheets/somestyle.css' );
+    wp_enqueue_style('maps', 'https://api.mapbox.com/mapbox.js/v3.0.1/mapbox.css');
+};
+add_action( 'get_footer', 'prefix_add_footer_styles' );
 
 
 add_action( 'after_setup_theme', 'mythemeslug_theme_setup' );
@@ -348,7 +352,7 @@ function add_js_scripts() {
     wp_enqueue_style('font-awesome', get_template_directory_uri().'/css/font-awesome.min.css');
     wp_enqueue_style('featherlight', get_template_directory_uri().'/css/featherlight.css');
     wp_enqueue_style('fonts-googleapis', get_template_directory_uri().'/css/fonts.googleapis.css');
-    wp_enqueue_style('maps', 'https://api.mapbox.com/mapbox.js/v3.0.1/mapbox.css');
+//    wp_enqueue_style('maps', 'https://api.mapbox.com/mapbox.js/v3.0.1/mapbox.css');
     wp_enqueue_script( 'maps', 'https://api.mapbox.com/mapbox.js/v3.0.1/mapbox.js', array('jquery'), '1.0', true );
 
     wp_enqueue_script( 'featherlight', get_template_directory_uri().'/js/featherlight.js', array('jquery'), '1.0', true );
@@ -360,12 +364,14 @@ function add_js_scripts() {
 function get_content_of_specific_page() {
     $param = $_GET['param'];
 
-    $args = array(
-        'post_type' => 'page',
-        'page_id' => $param
-    );
-    $ajax_query = new WP_Query($args);
-    echo apply_filters('the_content', $ajax_query->posts[0]->post_content);
+    if($param == 62) {
+        $content = str_replace('<p>', '<div><i class="fa fa-quote-left" aria-hidden="true"></i><div>', get_post_field('post_content', $param));
+        $content = str_replace('</p>', '</div><i class="fa fa-quote-right" aria-hidden="true"></i></div>', $content);
+//        var_dump($content);
+        echo $content;
+        die();
+    }
+    echo get_post_field('post_content', $param);
     die();
 }
 
@@ -418,7 +424,7 @@ function save_blocs_home( $post_id ) {
 
     $allowed = array('a' => array('href' => array()));
 
-    for($i = 1; $i < 7; $i++) {
+    for($i = 1; $i <= 8; $i++) {
         if(isset($_POST['bloc_home_'.$i]))
             update_post_meta($post_id, 'bloc_home_'.$i, esc_attr($_POST['bloc_home_'.$i], $allowed));
     }
@@ -438,6 +444,7 @@ function save_blocs_header( $post_id ) {
 }
 
 function add_champs_home_post_select($id, $i, $value) {
+    echo 'Bloc n°'.$i.' : ';
     echo '<select name="bloc_home_'.$i.'" id="bloc_home_'.$i.'">';
     echo '<option value="">Sélectionner le bloc '.$i.'</option>';
 
@@ -445,6 +452,7 @@ function add_champs_home_post_select($id, $i, $value) {
         'post__not_in' => array($id, 2, 66, 1276),
         'post_type'    => array('page', 'post'),
         'numberposts'      => 200,
+        'post_status' => 'publish',
         'posts_per_page'        => 200,
         'orderby' => 'title',
         'order' => 'ASC',
@@ -469,6 +477,7 @@ function add_champs_header_post_select($id, $i, $value) {
         'numberposts'      => 200,
         'category' => array(1, 19, 18),
         'posts_per_page'        => 200,
+        'post_status' => 'publish',
         'orderby' => 'date',
         'order' => 'DESC',
     );
@@ -488,9 +497,10 @@ function add_bloc_home( $post ) {
     $values = get_post_custom($post->ID);
 
     echo '<p>';
-    for($i = 1; $i < 7; $i++) {
+    for($i = 1; $i <= 8; $i++) {
         $id = isset( $values['bloc_home_'.$i] ) ? esc_attr( $values['bloc_home_'.$i][0] ) : '';
         add_champs_home_post_select($post->ID, $i, $id);
+        if(!($i % 2)) echo '</p></p>';
     }
     echo '</p>';
     echo '<script>';
@@ -715,7 +725,7 @@ function tango_get_blocs_bas()
 {
     $fields = get_post_custom();
     $blocs = array();
-    for($i = 1; $i <= 6; $i++) {
+    for($i = 1; $i <= 8; $i++) {
         if(isset($fields['bloc_home_'.$i]) && $fields['bloc_home_'.$i][0]) {
             $blocTmp = get_post_custom($fields['bloc_home_'.$i][0]);
             $blocTmp['url'] = get_the_permalink($fields['bloc_home_'.$i][0]);
