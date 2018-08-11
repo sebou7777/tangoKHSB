@@ -46,6 +46,7 @@
                 </p>
             </div></div>
         </div>
+        <p class="copyright">Copyright © 2018, Tango Argentin à Paris. Tout droit réservé.</p>
     </div>
 </footer>
 <?php wp_footer(); ?>
