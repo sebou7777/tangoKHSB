@@ -2,10 +2,10 @@
 
 <?php $blocs = get_blocs_hauts(); ?>
 <?php if(count($blocs)): ?>
-    <?php $class = ((count($blocs) == 5) ? 'is-2-desktop' : 'is-3-desktop') ?>
+    <?php $class = ((count($blocs) == 5) ? 'is-2-desktop is-2-tablet' : 'is-3-desktop is-3-tablet') ?>
     <section class="page-cards page-cards-images columns tosticky">
     <?php foreach($blocs as $bloc): ?>
-        <a href="/<?php echo $bloc['url'] ?>" data-id="<?php echo $bloc['id'] ?>" class="column one-card <?php echo $class ?> is-4-tablet is-12-mobile <?php echo ((isset($bloc['is_selected'])) ? 'is-active is-the-page' : '') ?> <?php echo (($bloc['ajax']) ? 'ajax-call' : '') ?>" title="<?php echo $bloc['titre'] ?>">
+        <a href="/<?php echo $bloc['url'] ?>" data-id="<?php echo $bloc['id'] ?>" class="column one-card <?php echo $class ?> is-12-mobile <?php echo ((isset($bloc['is_selected'])) ? 'is-active is-the-page' : '') ?> <?php echo (($bloc['ajax']) ? 'ajax-call' : '') ?>" title="<?php echo $bloc['titre'] ?>">
             <?php if($bloc['image']): ?>
             <div <?php echo (($bloc['image']) ? 'style="background-image: url('.$bloc['image'].');"' : '') ?> class="card-text">
                 <p><?php echo nl2br($bloc['texte']) ?></p>
@@ -19,7 +19,6 @@
         <?php $edito = last_edito(); ?>
         <section class="box container open-more" style="margin-top:30px;" data-open="Lire la suite" data-close="Fermer">
             <div class="wp-content content">
-<!--                <h2 class="has-text-centered">--><?php //echo $edito->post_title ?><!--</h2>-->
                 <?php echo apply_filters('the_content', $edito->post_content) ?>
             </div>
         </section>
@@ -29,7 +28,9 @@
 <?php if(is_front_page()): ?>
     <section>
         <div>
-            <div id="gmap-home" style="background-position: center;background-size: cover;background-image:url(http://s331430828.onlinehome.fr/wp-content/themes/tangoKHSB/images/maps.png)"></div>
+            <div id="gmap-home" style="background-position: center;background-size: cover;background-image:url(http://s331430828.onlinehome.fr/wp-content/themes/tangoKHSB/images/maps.png)">
+                <h2>Carte d'accés à l'école Victor - 35 rue Jussieu 75005 Paris</h2>
+            </div>
         </div>
     </section>
     <script>
@@ -50,9 +51,7 @@
                 <div class="columns 1-column">
                     <div class="column" data-open="Lire la suite" data-close="Fermer">
                         <div class="content img-text-block">
-                            <div <?php echo (($bloc['image']) ? 'style="background-image: url('.$bloc['image'].');"' : '') ?> class="img-block">
-                                <!-- <?php if($bloc['image']): ?><img src="<?php echo $bloc['image'] ?>" alt="<?php echo $bloc['titre'] ?>" title="<?php echo $bloc['titre'] ?>" /><?php endif; ?> -->
-                            </div>
+                            <div <?php echo (($bloc['image']) ? 'style="background-image: url('.$bloc['image'].');"' : '') ?> class="img-block"></div>
                             <div class="text-block">
                                 <h2><?php echo $bloc['titre'] ?></h2>
                                 <p><?php echo $bloc['description'] ?></p>
