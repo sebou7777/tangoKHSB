@@ -34,6 +34,12 @@
 #sticky-box-1 {
     display:none;
 }
+p.copyright {
+    text-align: center;
+    color: white;
+    font-size: 12px;
+    margin-top: 2rem;
+}
 .open-more {
     overflow: hidden;
     /*margin-bottom: 15px;*/
@@ -282,14 +288,53 @@ section.page-cards.page-cards-images a:hover h4 {
     margin: 10px;
 }
 
-
-#post-62 p {
-    width:80%;
-    padding:5px;
-    border: 1px solid grey;
-    background-color:white;
-    margin-bottom:10px;
+.fa-quote-left {
+    margin-right:0.5rem;
+    align-self: flex-start;
+    margin-top: 6px;
 }
+.fa-quote-right {
+    margin-left:0.5rem;
+    align-self: flex-end;
+    margin-bottom: 6px;
+}
+#post-62 div svg {
+    font-size:1.5rem;
+}
+#post-62 div b, #post-62 p strong {
+    display:contents;
+}
+#post-62 > div {
+    width:100%;
+    text-align: justify;
+    display:flex;
+    background-color:white;
+    margin-bottom:15px;
+}
+#post-62 > div i.fa {
+    height:1.5rem;
+    width:1.5rem;
+}
+#post-62 > div > div {
+    width:100%;
+    display: inline;
+    border-top: 1px dashed lightgrey;
+    border-bottom: 1px dashed lightgrey;
+    padding: 5px;
+}
+/*#post-62 > div:nth-child(even) {*/
+    /*margin-left:0;*/
+/*}*/
+/*#post-62 > div:nth-child(odd) {*/
+    /*margin-left:20%;*/
+/*}*/
+
+/*#post-62 p:before {*/
+    /*content: open-quote;*/
+/*}*/
+/*#post-62 p:after {*/
+    /*content: close-quote;*/
+/*}*/
 
 #content.is-home .columns .column p {
     margin-right: 10px;
@@ -319,13 +364,6 @@ img.aligncenter {
     max-width:100%;
     margin-left: auto;
     margin-right: auto;
-}
-
-#post-62 p:nth-child(even) {
-    margin-left:0;
-}
-#post-62 p:nth-child(odd) {
-    margin-left:20%;
 }
 
 #content.content ul.menu-list {
@@ -374,7 +412,7 @@ img.aligncenter {
     color:#FF590D;
 }
 
-@media screen and (max-width: 1023px) {
+@media screen and (max-width: 1087px) {
     .navbar-end .navbar-item {
         border-bottom: 1px solid lightgrey;
     }
@@ -558,6 +596,12 @@ section.header-image .info-wrapper.address {
     padding: 0.5rem 0.75rem;
 }
 
+footer.footer {
+    padding-bottom:0;
+}
+footer.footer .copyright {
+    margin-top:5rem;
+}
 
 .content table.horaires {
     border:0;
@@ -577,7 +621,11 @@ section.header-image .info-wrapper.address {
     padding:0.5rem;
     border: 2px solid white;
     vertical-align:middle;
-    background-color:lightgrey;
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    background-color: black;
+    color: white;
+    font-weight: normal;
 }
 .content table.horaires tr td {
     border:0;
