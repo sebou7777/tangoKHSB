@@ -51,7 +51,8 @@
                 <div class="columns 1-column">
                     <div class="column" data-open="Lire la suite" data-close="Fermer">
                         <div class="content img-text-block">
-                            <div <?php echo (($bloc['image']) ? 'style="background-image: url('.$bloc['image'].');"' : '') ?> class="img-block"></div>
+                          <?php if($bloc['image']): ?>  <div <?php echo (($bloc['image']) ? 'style="background-image: url('.$bloc['image'].');"' : '') ?> class="img-block"><?php endif; ?>
+                            </div>
                             <div class="text-block">
                                 <h2><?php echo $bloc['titre'] ?></h2>
                                 <p><?php echo $bloc['description'] ?></p>
