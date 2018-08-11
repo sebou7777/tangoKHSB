@@ -24,6 +24,9 @@ div.column.is-3 {
 div.column.is-4 {
     width: calc(33.33333% - 8px);
 }
+div.column.is-5 {
+    width: calc(41.66666% - 8px);
+}
 div.column.is-6 {
     width: calc(50% - 8px);
 }
