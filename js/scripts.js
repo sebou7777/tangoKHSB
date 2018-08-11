@@ -245,7 +245,7 @@ jQuery(document).ready(function($) {
 
     if(locationIQAddresses.length) {
         if(jQuery('#gmap-home').length) {
-            jQuery('#gmap-home').on('mouseenter', function() {
+            jQuery(document).on("scroll", function() {
                 if(!jQuery('#gmap-home').data('isloaded')) {
                     jQuery('#gmap-home').data('isloaded', true);
                     generateMap();
