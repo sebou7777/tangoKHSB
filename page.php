@@ -18,6 +18,7 @@
     <?php if(is_front_page()): ?>
         <?php $edito = last_edito(); ?>
         <section class="box container open-more" style="margin-top:30px;" data-open="Lire la suite" data-close="Fermer">
+            <h2 class="has-text-centered"><?php echo $edito->post_title ?></h2>
             <div class="wp-content content">
                 <?php echo apply_filters('the_content', $edito->post_content) ?>
             </div>
@@ -29,12 +30,12 @@
     <section>
         <div>
             <div id="gmap-home" style="background-position: center;background-size: cover;background-image:url(http://s331430828.onlinehome.fr/wp-content/themes/tangoKHSB/images/maps.png)">
-                <h2>Carte d'accés à l'école Victor - 35 rue Jussieu 75005 Paris</h2>
+                <h2>Carte d'accés à l'école Saint Victor - 35 rue Jussieu 75005 Paris</h2>
             </div>
         </div>
     </section>
     <script>
-        locationIQAddresses.push({"address":"35 rue Jussieu 75005 Paris", "title":"Ecole Victor", "zoom":"15", "pin_url":"", 'container':'gmap-home'});
+        locationIQAddresses.push({"address":"35 rue Jussieu 75005 Paris", "title":"Ecole Saint Victor", "zoom":"15", "pin_url":"", 'container':'gmap-home'});
     </script>
 <?php endif; ?>
 
