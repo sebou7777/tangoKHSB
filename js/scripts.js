@@ -215,7 +215,7 @@ jQuery(document).ready(function($) {
                     L.mapbox.accessToken = 'pk.eyJ1IjoidGFuZ29wb2xpcyIsImEiOiJjamtpMXZlbHgweHpzM3BtaTl0ZTRhNnd1In0.9cE9jRa4VRf9OflojHnsNw';
                     var map = L.mapbox.map(locationIQAddresses[index].container, 'mapbox.streets', {
                         scrollWheelZoom: false,
-                    }).setView([lat, lon], 16);
+                    }).setView([lat, lon], 14);
 
                     var geojson = {
                         "type": "FeatureCollection",
@@ -265,7 +265,7 @@ jQuery(document).ready(function($) {
     jQuery('#tomap').on('click', function() {
         if(jQuery('#gmap').length) {
             jQuery('#gmap').height('15rem');
-            locationIQAddresses.push({"address":"35 rue Jussieu 75005 Paris", "title":"Ecole Victor", "zoom":"15", "pin_url":"", 'container':'gmap'});
+            locationIQAddresses.push({"address":"35 rue Jussieu 75005 Paris", "title":"Ecole Saint Victor", "zoom":"15", "pin_url":"", 'container':'gmap'});
             if(!jQuery('#gmap').data('isloaded')) {
                 jQuery('#gmap').data('isloaded', true);
                 generateMap();

@@ -83,7 +83,7 @@
     </div>
 </div>
 <script>
-    locationIQAddresses.push({"address":"35 rue Jussieu 75005 Paris", "title":"Ecole Victor", "zoom":"15", "pin_url":"", 'container':'gmap-contact'});
+    locationIQAddresses.push({"address":"35 rue Jussieu 75005 Paris", "title":"Ecole Saint Victor", "zoom":"15", "pin_url":"", 'container':'gmap-contact'});
 </script>
 
 
