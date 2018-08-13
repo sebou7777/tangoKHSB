@@ -26,7 +26,7 @@ class WPSE_299521_Form {
             $text .= '<b>Objet : </b>'.$objet.'<br/><br/>';
             $text .= '<b>Message : </b><br/>'.nl2br($message);
 
-            mail('sebou7777@gmail.com', $objet, $text, implode("\r\n", $headers));
+            mail('tangopolis@free.fr', $objet, $text, implode("\r\n", $headers));
         }
     }
 
